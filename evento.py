@@ -1,4 +1,5 @@
 from datetime import datetime
+from util import menu_temas
 
 
 eventos = []
@@ -16,12 +17,10 @@ def cadastrar_evento():
     #tema = menu_temas
     #participante
 
-
-
     evento = {
         'nome' : nome,
         'data_evento' : data,
-        #'tema' : tema
+        'tema' : menu_temas()
         
     }
     eventos.append(evento)
@@ -35,7 +34,7 @@ def exibir_eventos():
     print("Eventos cadastrados:")
     for event in eventos:
         print(f"Nome: {event['nome']}")
-        print(f"Data: {event['data']}")
+        print(f"Data: {event['data_evento']}")
         print(f"Tema: {event['tema']}")
         #acho q n precisa de participante aq
     

@@ -18,7 +18,7 @@ def limpar_tela():
     
 def menu_geral(titulo, opcoes):
     while True:
-        limpar_tela()
+        #limpar_tela()
         print(f'{titulo.upper():^40}')
         for num_opcao, (descricao, _) in opcoes.items():
             print(f"{num_opcao}: {descricao}")
@@ -28,3 +28,19 @@ def menu_geral(titulo, opcoes):
             break
         _, funcao = opcoes[op]
         funcao()
+        
+def menu_temas():
+    #limpar
+    temas = ["Inteligência Artificial", "Web", "Segurança", "Rede", "Programação", "Banco de dados", "Mobile", "Computação em Nuvem", "Robótica"]
+    print("_" * 15, "TEMAS", "_" * 15)
+    print("1 - Inteligência Artificial - IA")
+    print("2 - Web")
+    print("3 - Segurança")
+    print("4 - Redes")
+    print("5 - Programação")
+    print("6 - Banco de Dados")
+    print("7 - Mobile")
+    print("8 - Computação em Nuvem")
+    print("9 - Robótica")
+    op = ler_opcao(len(temas))
+    return temas[op - 1]
