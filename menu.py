@@ -42,10 +42,9 @@ def menu_eventos():
     menu_geral(f'{"EVENTO":^40}', opcoes)
 def menu_participantes():
     opcoes = {
-        1: ("Cadastrar novo participante", menu_participantes),
+        1: ("Cadastrar novo participante", cadastrar_participante),
         2: ("Buscar participante por código", menu_eventos),
         3: ("Atualizar e-mail", estatisticas),
         4: ("Remover participante", estatisticas),
     }
     menu_geral(f'{"PARTICIPANTE":^40}', opcoes)
-    
