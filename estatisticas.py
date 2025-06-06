@@ -1,0 +1,2 @@
+def estatisticas():
+    pass
