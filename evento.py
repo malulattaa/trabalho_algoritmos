@@ -1,5 +1,5 @@
 from datetime import datetime
-from menu import menu_temas
+
 
 eventos = []
 
@@ -13,7 +13,7 @@ def cadastrar_evento():
         except ValueError:
             print("Data inválida. Tente novamente.")
             
-    tema = menu_temas()
+    #tema = menu_temas
     #participante
 
 
@@ -21,7 +21,7 @@ def cadastrar_evento():
     evento = {
         'nome' : nome,
         'data_evento' : data,
-        'tema' : tema
+        #'tema' : tema
         
     }
     eventos.append(evento)

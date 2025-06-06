@@ -1,27 +1,17 @@
-from util import limpar_tela, ler_opcao
+from util import ler_opcao, limpar_tela, menu_geral
 from participante import cadastrar_participante
-from evento import cadastrar_evento
 from estatisticas import estatisticas
+from evento import cadastrar_evento, exibir_eventos
+
 
 def menu_principal():
-    #limpar
-    print("_" * 20, "MENU", "_" * 20)
-    print("1 - Gerenciar participantes")
-    print("2 - Gerenciar eventos")
-    print("3 - Estastísticas e relatórios") 
-    print("0 - Sair")
-    op = ler_opcao(3)
-    
     opcoes = {
-        1: menu_participantes,
-        2: menu_eventos,
-        3: estatisticas,
-        
-        
+        1: ("Gerenciar participantes", menu_participantes),
+        2: ("Gerenciar eventos", menu_eventos),
+        3: ("Estastísticas e relatórios", estatisticas),
     }
-    if op == 0:
-        print("Encerrando.")
-        return    
+    menu_geral(f'{"MENU":^40}', opcoes)
+
 def menu_temas():
     #limpar
     temas = ["Inteligência Artificial", "Web", "Segurança", "Rede", "Programação", "Banco de dados", "Mobile", "Computação em Nuvem", "Robótica"]
@@ -38,29 +28,24 @@ def menu_temas():
     op = ler_opcao(len(temas))
     return temas[op - 1]
     
-    
 def menu_eventos():
     #limpar
-    print("_" * 20, "EVENTO", "_" * 20)
-    print("1 - Cadastrar novo evento") 
-    print("2 - Exibir lista de eventos") 
-    print("3 - Listar participantes por evento") 
-    print("4 - Remover evento") 
-    print("5 - Trocar tema de um evento")
-    print("5 - Filtrar evento por tema/data") 
-    print("6 - Agrupar por tema") 
-    print("0 - Voltar ao menu anterior") 
-    op = ler_opcao(6)
+    opcoes = {
+        1: ("Cadastrar novo evento", cadastrar_evento),
+        2: ("Exibir lista de eventos", exibir_eventos),
+        #3: ("Listar participantes por evento", cadastrar_evento),
+        #4: ("Remover evento", cadastrar_evento),
+        #5: ("Trocar tema de um evento", cadastrar_evento),
+        #6: ("Filtrar evento por tema/data", cadastrar_evento),
+        #7: ("Agrupar por tema", cadastrar_evento),
+    }
+    menu_geral(f'{"EVENTO":^40}', opcoes)
 def menu_participantes():
-    #limpar
-    print(f'{"PARTICIPANTE":^40}')
-    print("")
-    print("1 - Cadastrar novo participante")
-    print("2 - Buscar participante por código") 
-    print("3 - Atualizar e-mail") 
-    #nao sei se é melhor fazer isso separado ou junto e abrir outro menu pra escolher
-    print("4 - Remover participante") 
-    #isso tb vale pra participante? la n ta especificando
-    print("0 - Voltar ao menu anterior")
-    op = ler_opcao(4)
+    opcoes = {
+        1: ("Cadastrar novo participante", menu_participantes),
+        2: ("Buscar participante por código", menu_eventos),
+        3: ("Atualizar e-mail", estatisticas),
+        4: ("Remover participante", estatisticas),
+    }
+    menu_geral(f'{"PARTICIPANTE":^40}', opcoes)
     
