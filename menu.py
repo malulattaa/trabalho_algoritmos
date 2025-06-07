@@ -1,5 +1,5 @@
 from util import ler_opcao, limpar_tela, menu_geral
-from participante import cadastrar_participante
+from participante import cadastrar_participante, inscricao_evento
 from estatisticas import estatisticas
 from evento import cadastrar_evento, exibir_eventos
 
@@ -43,8 +43,9 @@ def menu_eventos():
 def menu_participantes():
     opcoes = {
         1: ("Cadastrar novo participante", cadastrar_participante),
-        2: ("Buscar participante por código", menu_eventos),
-        3: ("Atualizar e-mail", estatisticas),
-        4: ("Remover participante", estatisticas),
+        2: ("Realizar inscrição em eventos", inscricao_evento),
+        3: ("Buscar participante por código", menu_eventos),
+        4: ("Atualizar e-mail", estatisticas),
+        5: ("Remover participante", estatisticas),
     }
     menu_geral(f'{"PARTICIPANTE":^40}', opcoes)

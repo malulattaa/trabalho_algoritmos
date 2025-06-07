@@ -1,4 +1,5 @@
 from util import menu_temas
+from evento import exibir_eventos
 participantes = []
 
 
@@ -28,4 +29,7 @@ def cadastrar_participante():
     }
     participantes.append(participante)
     print(f"Participante {nome} cadastrado com sucesso!")
+    
+
+    
 
