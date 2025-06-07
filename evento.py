@@ -24,17 +24,19 @@ def cadastrar_evento():
         
     }
     eventos.append(evento)
-    #por um print aq de cadastrado com sucesso
-    
+    print(f"Evento {evento['nome']} cadastrado com sucesso!")
+
 def exibir_eventos():
     if len(eventos) == 0:
         print("Nenhum evento cadastrado.")
         return
 
     print("Eventos cadastrados:")
-    for event in eventos:
+    for numero, event in enumerate(eventos, start=1):
+        print(f"Evento {numero}")
         print(f"Nome: {event['nome']}")
         print(f"Data: {event['data_evento']}")
         print(f"Tema: {event['tema']}")
+        print("")
         #acho q n precisa de participante aq
     

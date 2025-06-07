@@ -21,6 +21,7 @@ def cadastrar_participante():
             print("Digite uma opção válida (S ou N).")
 
     participante = {
+        #'id': id,
         'nome' : nome,
         'email' : email, #ver se pode por e-mal
         'pref_tematica' : preferencia,
