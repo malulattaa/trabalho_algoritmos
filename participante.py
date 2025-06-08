@@ -1,14 +1,12 @@
-from util import menu_temas
+from temas import menu_temas
 from evento import exibir_eventos
 participantes = []
 
-
+id_participante = 1
 def cadastrar_participante():
-    #o id deve ser gerado automatico?
+    global id_participante
     nome = input("Nome completo: ")
     email = input("e-mail: ")
-#fazer um while pra ver se quer continuar adicionando
-#guardar todas as escolhidas em uma lista
     preferencia = []
     while True:
         sair = input("Deseja adicionar uma preferência temática? (S para sim)/(N para não): ").upper().strip()
@@ -22,12 +20,14 @@ def cadastrar_participante():
             print("Digite uma opção válida (S ou N).")
 
     participante = {
-        #'id': id,
+        'id': id_participante,
         'nome' : nome,
         'email' : email, #ver se pode por e-mal
         'pref_tematica' : preferencia,
+        'eventos' : []
     }
     participantes.append(participante)
+    id_participante += 1
     print(f"Participante {nome} cadastrado com sucesso!")
     
 

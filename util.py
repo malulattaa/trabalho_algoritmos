@@ -1,4 +1,5 @@
 import os
+from participante import cadastrar_participante
 
 def ler_opcao(lim_sup):
     #ler a opção ate que seja valido 
@@ -28,19 +29,9 @@ def menu_geral(titulo, opcoes):
             break
         _, funcao = opcoes[op]
         funcao()
-        
-def menu_temas():
-    #limpar
-    temas = ["Inteligência Artificial", "Web", "Segurança", "Rede", "Programação", "Banco de dados", "Mobile", "Computação em Nuvem", "Robótica"]
-    print("_" * 15, "TEMAS", "_" * 15)
-    print("1 - Inteligência Artificial - IA")
-    print("2 - Web")
-    print("3 - Segurança")
-    print("4 - Redes")
-    print("5 - Programação")
-    print("6 - Banco de Dados")
-    print("7 - Mobile")
-    print("8 - Computação em Nuvem")
-    print("9 - Robótica")
-    op = ler_opcao(len(temas))
-    return temas[op - 1]
+
+def buscar_participante(id, lista_participantes):
+    return next((p for p in lista_participantes if p['id'] == id), None)
+
+def buscar_evento(id, lista_eventos):
+    return next((e for e in lista_eventos if e['id'] == id), None)
