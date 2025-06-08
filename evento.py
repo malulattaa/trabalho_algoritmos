@@ -17,7 +17,8 @@ def cadastrar_evento():
         'id' : id_evento,
         'nome' : nome,
         'data_evento' : data,
-        'tema' : menu_temas()
+        'tema' : menu_temas(),
+        'participantes' : []
         
     }
     eventos.append(evento)
@@ -40,4 +41,19 @@ def exibir_eventos():
         #acho q n precisa de participante aq
 
 def listar_participantes_evento():
-    pass
+    from util import buscar_evento
+    from participante import participantes
+    exibir_eventos()
+    try:
+        id_evento = int(input("Digite o ID do evento: "))
+    except ValueError:
+        print("ID inválido.")
+    evento = buscar_evento(id_evento, eventos)
+    if not evento:
+        print("Evento não encontrado.")
+        return
+    filtrar = list(filter(lambda p: p['id'] in evento['participantes'], participantes))
+    print(f"Participantes inscritos no evento {evento['nome']}")
+    print("")
+    for p in filtrar:
+        print(f"{p['nome']} - {p['email']}")

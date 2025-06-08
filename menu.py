@@ -1,7 +1,7 @@
 from util import ler_opcao, limpar_tela, menu_geral
 from participante import cadastrar_participante
 from estatisticas import estatisticas
-from evento import cadastrar_evento, exibir_eventos
+from evento import cadastrar_evento, exibir_eventos, listar_participantes_evento
 
 
 def menu_principal():
@@ -33,7 +33,7 @@ def menu_eventos():
     opcoes = {
         1: ("Cadastrar novo evento", cadastrar_evento),
         2: ("Exibir lista de eventos", exibir_eventos),
-        #3: ("Listar participantes por evento", cadastrar_evento),
+        3: ("Listar participantes por evento", listar_participantes_evento),
         #4: ("Remover evento", cadastrar_evento),
         #5: ("Trocar tema de um evento", cadastrar_evento),
         #6: ("Filtrar evento por tema/data", cadastrar_evento),
@@ -74,4 +74,5 @@ def inscricao_evento():
         print("O participante já está inscrito nesse evento!")
     else:
         participante['eventos'].append(id_evento)
+        evento['participantes'].append(id_participante)
         print(f"{participante['nome']} inscrito no evento {evento['nome']} com sucesso!")
