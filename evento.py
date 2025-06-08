@@ -43,18 +43,27 @@ def exibir_eventos():
 def inscricao_evento():
     exibir_eventos()
     while True:
-        sair = input("Deseja se inscrever em algum evento? S (sim) / N (não) ")
+        sair = input("Deseja se inscrever em algum evento? S (sim) / N (não) ").upper()
         if sair == 'N':
             break
         elif sair == 'S':
             try:
                 codigo = int(input("Digite o código do evento que deseja se inscrever: "))
             except ValueError:
-                print("Código inválido.")
+                print("Código inválido. Tente novamente.")
                 continue
-                for event in eventos:
-                    if event['id'] == codigo:
-                        evento_encontrado = event
+            filtro = filter(lambda x: x['id'] == codigo, eventos)
+            evento_encontrado = next(filtro, None)
+            if evento_encontrado:
+                print(f"Evento {evento_encontrado['nome']} encontrado")
+                try:
+                    id_participante = int(input("Digite o ID do participante a ser inscrito: "))
+                except ValueError:
+                    print("ID inválido.")
+                    continue
+                pessoa = next((p for p in participantes if p['id'] == id_participante), None)
+            else:
+                print("Evento não encontrado!")
                     
                 
 def listar_participantes_evento():
