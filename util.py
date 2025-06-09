@@ -31,7 +31,19 @@ def menu_geral(titulo, opcoes):
         funcao()
 
 def buscar_participante(id, lista_participantes):
-    return next((p for p in lista_participantes if p['id'] == id), None)
+    participante = next((p for p in lista_participantes if p['id'] == id), None)
+    if not participante:
+        print("Participante não encontrado.")
+    return participante
 
 def buscar_evento(id, lista_eventos):
     return next((e for e in lista_eventos if e['id'] == id), None)
+    """ if not evento:
+        print("Evento não encontrado.")
+    return evento"""
+
+def verificar_participantes(evento, participantes):
+    return list(filter(lambda p: p['id'] in evento['participantes'], participantes))
+    """ if not filtrar:
+        print("Nenhum participante inscrito nesse evento.")
+    return filtrar"""

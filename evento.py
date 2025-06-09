@@ -41,7 +41,7 @@ def exibir_eventos():
         #acho q n precisa de participante aq
 
 def listar_participantes_evento():
-    from util import buscar_evento
+    from util import buscar_evento, verificar_participantes
     from participante import participantes
     exibir_eventos()
     try:
@@ -52,8 +52,34 @@ def listar_participantes_evento():
     if not evento:
         print("Evento não encontrado.")
         return
-    filtrar = list(filter(lambda p: p['id'] in evento['participantes'], participantes))
-    print(f"Participantes inscritos no evento {evento['nome']}")
+    inscritos = verificar_participantes(evento, participantes)
+    if inscritos:
+        for p in inscritos:
+            print(f"{p['nome']} - {p['email']}")
+    
+        
+def deletar_evento():
+    #remover com pessoas dentro pode ser um problema
+    #remover os participantes primeiro
+    from util import buscar_evento, verificar_participantes
+    from participante import participantes
+    print("Verifique se há participantes inscritos nesse evento antes de deletá-lo.")
     print("")
-    for p in filtrar:
-        print(f"{p['nome']} - {p['email']}")
+    exibir_eventos()
+    print("")
+    try:
+        deletar = int(input("Digite o id do evento que deseja excluir: "))
+    except ValueError:
+        print("ID inválido. Tente novamente.")
+    #ver se da pra fazer uma funcao com esse try except pq ta repetindo mt
+    evento = buscar_evento(deletar, eventos)
+    if not evento:
+        print("Evento não encontrado.")
+        return
+    inscritos = verificar_participantes(evento, participantes)
+    if inscritos:
+        print("Delete os participantes do evento antes de excluí-lo.")
+        return
+    eventos.remove(evento)
+    print(f"Evento {evento['nome']} removido com sucesso.")
+    

@@ -1,7 +1,7 @@
 from util import ler_opcao, limpar_tela, menu_geral
 from participante import cadastrar_participante
 from estatisticas import estatisticas
-from evento import cadastrar_evento, exibir_eventos, listar_participantes_evento
+from evento import cadastrar_evento, exibir_eventos, listar_participantes_evento, deletar_evento
 
 
 def menu_principal():
@@ -34,7 +34,7 @@ def menu_eventos():
         1: ("Cadastrar novo evento", cadastrar_evento),
         2: ("Exibir lista de eventos", exibir_eventos),
         3: ("Listar participantes por evento", listar_participantes_evento),
-        #4: ("Remover evento", cadastrar_evento),
+        4: ("Remover evento", deletar_evento),
         #5: ("Trocar tema de um evento", cadastrar_evento),
         #6: ("Filtrar evento por tema/data", cadastrar_evento),
         #7: ("Agrupar por tema", cadastrar_evento),
@@ -64,12 +64,6 @@ def inscricao_evento():
         return        
     evento = buscar_evento(id_evento, eventos)
     participante = buscar_participante(id_participante, participantes)
-    if not evento:
-        print("Evento não encontrado.")
-        return
-    if not participante:
-        print("Participante não encontrado")
-        return
     if id_evento in participante['eventos']:
         print("O participante já está inscrito nesse evento!")
     else:
