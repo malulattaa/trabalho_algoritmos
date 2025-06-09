@@ -17,11 +17,11 @@ def menu_temas():
     return temas[op - 1]
 
 def trocar_tema():
-    from util import buscar_evento, verificar_id
+    from util import existencia, ler_id
     from evento import eventos
-    tema_evento = verificar_id("Digite o id do evento que deseja trocar o tema: ")
+    id_evento = existencia("Digite o id do evento que deseja trocar o tema: ")
     #escrever se nao for o certo
-    evento = buscar_evento(tema_evento, eventos)
+    evento = ler_id(id_evento, eventos)
     if evento:
         print(f"{evento['nome']}")
         print(f"{evento['tema']}")

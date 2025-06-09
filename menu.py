@@ -1,5 +1,5 @@
 from util import ler_opcao, limpar_tela, menu_geral, buscar_participante
-from participante import cadastrar_participante, procurar_participante
+from participante import cadastrar_participante, procurar_participante, atualizar_email, deletar_participante
 from estatisticas import estatisticas
 from evento import cadastrar_evento, exibir_eventos, listar_participantes_evento, deletar_evento
 from temas import trocar_tema
@@ -45,8 +45,8 @@ def menu_participantes():
         1: ("Cadastrar novo participante", cadastrar_participante),
         2: ("Realizar inscrição em eventos", inscricao_evento),
         3: ("Buscar participante por código", procurar_participante),
-        4: ("Atualizar e-mail", estatisticas),
-        5: ("Remover participante", estatisticas),
+        4: ("Atualizar e-mail", atualizar_email),
+        5: ("Remover participante", deletar_participante),
     }
     menu_geral(f'{"PARTICIPANTE":^40}', opcoes)
 

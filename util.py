@@ -29,28 +29,22 @@ def menu_geral(titulo, opcoes):
             break
         _, funcao = opcoes[op]
         funcao()
-
-def buscar_participante(id, lista_participantes):
-    participante = next((p for p in lista_participantes if p['id'] == id), None)
-    if not participante:
-        print("Participante não encontrado.")
-    return participante
-
-def buscar_evento(id, lista_eventos):
-    return next((e for e in lista_eventos if e['id'] == id), None)
-    """ if not evento:
-        print("Evento não encontrado.")
-    return evento"""
-
 def verificar_participantes(evento, participantes):
     return list(filter(lambda p: p['id'] in evento['participantes'], participantes))
     """ if not filtrar:
         print("Nenhum participante inscrito nesse evento.")
     return filtrar"""
 
-def verificar_id(mensagem="Digite o ID: "):
-    try:
-        return int(input(mensagem))
-    except ValueError:
-        print("ID inválido. Tente novamente.")
-        return
+def ler_id(mensagem="Digite o ID: "):
+    from participante import participantes
+    from evento import eventos
+    while True:
+        try:
+            return int(input(mensagem))
+        except ValueError:
+            print("ID inválido.")
+
+def existencia(id, lista):
+    item = next((i for i in lista if i['id'] == id), None)
+    if not item:
+        print(f"ID não encontrado.")

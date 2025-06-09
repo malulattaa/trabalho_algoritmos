@@ -31,55 +31,50 @@ def exibir_eventos():
         return
 
     print("Eventos cadastrados:")
-    for numero, event in enumerate(eventos, start=1):
-        print(f"Evento {numero}")
+    for event in sorted(eventos, key=lambda e: e['data_evento']):
+        print(f"Data: {event['data_evento']}")
         print(f"Código do evento: {event['id']}")
         print(f"Nome: {event['nome']}")
-        print(f"Data: {event['data_evento']}")
         print(f"Tema: {event['tema']}")
         print("")
         #acho q n precisa de participante aq
 
 def listar_participantes_evento():
-    from util import buscar_evento, verificar_participantes
+    from util import ler_id, existencia, verificar_participantes
     from participante import participantes
+    
     exibir_eventos()
-    try:
-        id_evento = int(input("Digite o ID do evento: "))
-    except ValueError:
-        print("ID inválido.")
-    evento = buscar_evento(id_evento, eventos)
+    id_evento = ler_id("Digite o ID do evento: ")
+    evento = existencia(id_evento, eventos)
     if not evento:
         print("Evento não encontrado.")
         return
     inscritos = verificar_participantes(evento, participantes)
     if inscritos:
+        print(f"Participantes inscritos no evento {evento['nome']}: ")
         for p in inscritos:
             print(f"{p['nome']} - {p['email']}")
-    
-        
+    else:
+        print("Esse evento não possui participantes.")
 def deletar_evento():
-    #remover com pessoas dentro pode ser um problema
-    #remover os participantes primeiro
-    from util import buscar_evento, verificar_participantes
+    from util import ler_id, existencia, verificar_participantes
     from participante import participantes
+    
     print("Verifique se há participantes inscritos nesse evento antes de deletá-lo.")
     print("")
     exibir_eventos()
     print("")
-    try:
-        deletar = int(input("Digite o id do evento que deseja excluir: "))
-    except ValueError:
-        print("ID inválido. Tente novamente.")
-    #ver se da pra fazer uma funcao com esse try except pq ta repetindo mt
-    evento = buscar_evento(deletar, eventos)
+    
+    id_evento = ler_id("Digite o ID do evento: ")
+    evento = existencia(id_evento, eventos)
     if not evento:
-        print("Evento não encontrado.")
         return
+    
     inscritos = verificar_participantes(evento, participantes)
     if inscritos:
         print("Delete os participantes do evento antes de excluí-lo.")
         return
+    
     eventos.remove(evento)
     print(f"Evento {evento['nome']} removido com sucesso.")
     
