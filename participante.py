@@ -9,22 +9,19 @@ def cadastrar_participante():
     nome = input("Nome completo: ")
     #ver se digitar nome vazio
     email = input("e-mail: ")
+    
     emails_existentes = set(p['email'] for p in participantes)
+    
     if email in emails_existentes:
         print("Esse e-mail já está sendo usado.")
         return
+    
     preferencia = []
-    while True:
-        sair = input("Deseja adicionar uma preferência temática? (S para sim)/(N para não): ").upper().strip()
-        if sair == 'N':
-            break
-        elif sair == 'S':
-            print(f'{"PREFERÊNCIA TEMÁTICA":^40}')
-            tema = menu_temas() 
-            preferencia.append(tema)
-        else:
-            print("Digite uma opção válida (S ou N).")
-
+    while input("Deseja adicionar uma preferência temática? (S para sim)/(N para não): ").upper().strip() == 'S':
+        print(f'{"PREFERÊNCIA TEMÁTICA":^40}')
+        tema = menu_temas() 
+        preferencia.append(tema)
+        
     participante = {
         'id': id_participante,
         'nome' : nome,
@@ -71,3 +68,26 @@ def deletar_participante():
         return
     participantes.remove(participante)
     print(f"Participante {participante['nome']} removido com sucesso.")
+    
+def inscricao_evento():
+    from util import existencia, ler_id
+    from participante import participantes
+    from evento import eventos, exibir_eventos
+    exibir_eventos()
+    #se nenhum evento tiver cadastrado ja para
+    
+    id_evento = ler_id("Digite o ID do evento: ")
+    evento = existencia(id_evento, eventos)
+    if not evento:
+        return
+    
+    id_participante = ler_id("Digite o ID do participante: ")
+    participante = existencia(id_participante, participantes)
+    if not participante:
+        return
+    if id_evento in participante['eventos']:
+        print("O participante já está inscrito nesse evento!")
+        return
+    participante['eventos'].append(id_evento)
+    evento['participantes'].append(id_participante)
+    print(f"{participante['nome']} inscrito no evento {evento['nome']} com sucesso!")

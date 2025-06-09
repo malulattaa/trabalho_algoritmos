@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date
 from temas import menu_temas
 
 eventos = []
@@ -10,6 +10,9 @@ def cadastrar_evento():
         data_evento = input("Data do evento (dd/mm/aaaa): ")
         try:
             data = datetime.strptime(data_evento, "%d/%m/%Y").date()
+            if data < date.today():
+                print("Não é possível cadastrar eventos em datas passadas.")
+                continue
             break 
         except ValueError:
             print("Data inválida. Tente novamente.")
