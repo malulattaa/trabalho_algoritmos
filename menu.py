@@ -5,6 +5,7 @@ from evento import cadastrar_evento, exibir_eventos, listar_participantes_evento
 from temas import trocar_tema, menu_temas
 
 def menu_principal():
+    limpar_tela()
     opcoes = {
         1: ("Gerenciar participantes", menu_participantes),
         2: ("Gerenciar eventos", menu_eventos),
@@ -13,7 +14,7 @@ def menu_principal():
     menu_geral(f'{"MENU":^40}', opcoes)
 
 def menu_eventos():
-    #limpar
+    limpar_tela()
     opcoes = {
         1: ("Cadastrar novo evento", cadastrar_evento),
         2: ("Exibir lista de eventos", exibir_eventos),

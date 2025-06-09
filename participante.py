@@ -5,6 +5,8 @@ participantes = []
 
 id_participante = 1
 def cadastrar_participante():
+    from util import limpar_tela
+    limpar_tela()
     global id_participante
     nome = input("Nome completo: ")
     #ver se digitar nome vazio
@@ -37,14 +39,15 @@ def procurar_participante():
     from util import ler_id, existencia
     id_participante = ler_id("Digite o id do participante que deseja buscar: ")
     participante = existencia(id_participante, participantes)
-    if participante: 
-        print(f"Participante {participante['id']}:")
-        print(f"Nome: {participante['nome']}")
-        print(f"E-mail: {participante['email']}")
-        print(f"Preferências temáticas: ")
-        print(",".join(participante['pref_tematica']) if participante['pref_tematica'] else "O participante não tem preferência temática.")
-        print(f"Eventos: ")
-        print(",".join(participante['eventos']) if participante['eventos'] else "O participante não está inscrito em eventos.")
+    if not participante: 
+        return
+    print(f"Participante {participante['id']}:")
+    print(f"Nome: {participante['nome']}")
+    print(f"E-mail: {participante['email']}")
+    print(f"Preferências temáticas: ")
+    print(",".join(participante['pref_tematica']) if participante['pref_tematica'] else "O participante não tem preferência temática.")
+    print(f"Eventos: ")
+    print(",".join(participante['eventos']) if participante['eventos'] else "O participante não está inscrito em eventos.")
 
 def atualizar_email():
     from util import ler_id, existencia
@@ -71,7 +74,6 @@ def deletar_participante():
     
 def inscricao_evento():
     from util import existencia, ler_id
-    from participante import participantes
     from evento import eventos, exibir_eventos
     exibir_eventos()
     #se nenhum evento tiver cadastrado ja para
