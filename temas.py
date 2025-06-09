@@ -15,3 +15,18 @@ def menu_temas():
     print("9 - Robótica")
     op = ler_opcao(len(temas))
     return temas[op - 1]
+
+def trocar_tema():
+    from util import buscar_evento, verificar_id
+    from evento import eventos
+    tema_evento = verificar_id("Digite o id do evento que deseja trocar o tema: ")
+    #escrever se nao for o certo
+    evento = buscar_evento(tema_evento, eventos)
+    if evento:
+        print(f"{evento['nome']}")
+        print(f"{evento['tema']}")
+        print(f"Deseja trocar o tema do evento {evento['nome']} por qual tema? ")
+        tema_novo = menu_temas()
+        evento['tema'] = tema_novo
+        print(f"O tema do evento {evento['nome']} foi alterado para {tema_novo}.")
+    

@@ -47,3 +47,10 @@ def verificar_participantes(evento, participantes):
     """ if not filtrar:
         print("Nenhum participante inscrito nesse evento.")
     return filtrar"""
+
+def verificar_id(mensagem="Digite o ID: "):
+    try:
+        return int(input(mensagem))
+    except ValueError:
+        print("ID inválido. Tente novamente.")
+        return

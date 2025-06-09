@@ -1,5 +1,7 @@
 from temas import menu_temas
 from evento import exibir_eventos
+
+
 participantes = []
 
 id_participante = 1
@@ -30,6 +32,16 @@ def cadastrar_participante():
     id_participante += 1
     print(f"Participante {nome} cadastrado com sucesso!")
     
-
+def procurar_participante():
+    from util import buscar_participante, verificar_id
+    procurar = verificar_id("Digite o id do participante que deseja buscar: ")
+    participante = buscar_participante(procurar, participantes)
+    if participante: 
+        print(f"Participante {participante['id']}:")
+        print(f"Nome: {participante['nome']}")
+        print(f"E-mail: {participante['email']}")
+        print(f"Preferências temáticas: {participante['pref_tematica']}")
+        print(f"Eventos: {participante['eventos']}")
+        #arrumar a forma que mostra pref tematica e eventos
     
 
