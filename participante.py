@@ -7,7 +7,12 @@ id_participante = 1
 def cadastrar_participante():
     global id_participante
     nome = input("Nome completo: ")
+    #ver se digitar nome vazio
     email = input("e-mail: ")
+    emails_existentes = set(p['email'] for p in participantes)
+    if email in emails_existentes:
+        print("Esse e-mail já está sendo usado.")
+        return
     preferencia = []
     while True:
         sair = input("Deseja adicionar uma preferência temática? (S para sim)/(N para não): ").upper().strip()
@@ -39,28 +44,30 @@ def procurar_participante():
         print(f"Participante {participante['id']}:")
         print(f"Nome: {participante['nome']}")
         print(f"E-mail: {participante['email']}")
-        print(f"Preferências temáticas: {participante['pref_tematica']}")
-        print(f"Eventos: {participante['eventos']}")
-        #arrumar a forma que mostra pref tematica e eventos
+        print(f"Preferências temáticas: ")
+        print(",".join(participante['pref_tematica']) if participante['pref_tematica'] else "O participante não tem preferência temática.")
+        print(f"Eventos: ")
+        print(",".join(participante['eventos']) if participante['eventos'] else "O participante não está inscrito em eventos.")
 
 def atualizar_email():
     from util import ler_id, existencia
-    from participante import participantes
     id_participante = ler_id("Digite o id do participante que deseja buscar: ")
     participante = existencia(id_participante, participantes)
-    if participante:
-        print("Participante encontrado: ")
-        print(f"{participante['nome']}")
-        print(f"{participante['email']}")
-        print("")
-        email_novo = input(f"Digite o novo e-mail do participante {participante['nome']}: ")
-        participante['email'] = email_novo
-        print(f"O e-mail do participante {participante['nome']} foi alterado com sucesso para {email_novo}.")
+    if not participante:
+        return
+    print("Participante encontrado: ")
+    print(f"Nome: {participante['nome']}")
+    print(f"E-mail atual: {participante['email']}")
+    print("")
+    email_novo = input(f"Digite o novo e-mail do participante {participante['nome']}: ")
+    participante['email'] = email_novo
+    print(f"O e-mail do participante {participante['nome']} foi alterado com sucesso para {email_novo}.")
 
 def deletar_participante():
     from util import ler_id, existencia
-    from participante import participantes
     id_participante = ler_id("Digite o id do participante que deseja buscar: ")
     participante = existencia(id_participante, participantes)
+    if not participante:
+        return
     participantes.remove(participante)
     print(f"Participante {participante['nome']} removido com sucesso.")

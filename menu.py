@@ -1,4 +1,4 @@
-from util import ler_opcao, limpar_tela, menu_geral, buscar_participante
+from util import ler_opcao, limpar_tela, menu_geral
 from participante import cadastrar_participante, procurar_participante, atualizar_email, deletar_participante
 from estatisticas import estatisticas
 from evento import cadastrar_evento, exibir_eventos, listar_participantes_evento, deletar_evento
@@ -51,7 +51,7 @@ def menu_participantes():
     menu_geral(f'{"PARTICIPANTE":^40}', opcoes)
 
 def inscricao_evento():
-    from util import buscar_evento, buscar_participante
+    from util import existencia
     from participante import participantes
     from evento import eventos
     exibir_eventos()
@@ -62,8 +62,8 @@ def inscricao_evento():
     except ValueError:
         print("ID inválido.")
         return        
-    evento = buscar_evento(id_evento, eventos)
-    participante = buscar_participante(id_participante, participantes)
+    evento = existencia(id_evento, eventos)
+    participante = existencia(id_participante, participantes)
     if id_evento in participante['eventos']:
         print("O participante já está inscrito nesse evento!")
     else:
