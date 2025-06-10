@@ -8,18 +8,26 @@ def cadastrar_evento():
     nome = input("Nome: ")
     while True:
         data_evento = input("Data do evento (dd/mm/aaaa): ")
+        print("Digite o horário que o evento irá ocorrer 07:00 - 18:00")
+        #posso fazer isso?
+        hora = input("Digite o horário do evento (h:min): ")
         try:
             data = datetime.strptime(data_evento, "%d/%m/%Y").date()
+            horario = datetime.strptime(hora, "%H:%M").time()
             if data < date.today():
                 print("Não é possível cadastrar eventos em datas passadas.")
                 continue
+            if 7 > horario > 18:
+                print("Horário não comercial. Escolha um horário entre as 07:00 às 18:00.")
+                continue
             break 
         except ValueError:
-            print("Data inválida. Tente novamente.")
+            print("Data/hora inválida. Tente novamente.")
     evento = {
         'id' : id_evento,
         'nome' : nome,
         'data_evento' : data,
+        'hora_evento' : horario,
         'tema' : menu_temas(),
         'participantes' : []
         
@@ -35,7 +43,7 @@ def exibir_eventos():
 
     print("Eventos cadastrados:")
     for event in sorted(eventos, key=lambda e: e['data_evento']):
-        print(f"Data: {event['data_evento']}")
+        print(f"Data: {event['data_evento']} - Hora: {event['hora_evento']}")
         print(f"Código do evento: {event['id']}")
         print(f"Nome: {event['nome']}")
         print(f"Tema: {event['tema']}")
