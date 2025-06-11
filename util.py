@@ -48,3 +48,4 @@ def existencia(id, lista):
     item = next((i for i in lista if i['id'] == id), None)
     if not item:
         print(f"ID não encontrado.")
+    return item

@@ -1,25 +1,31 @@
-from datetime import datetime, date
+from datetime import datetime, date, time
 from temas import menu_temas
 
 eventos = []
 id_evento = 1
 def cadastrar_evento():
+    from util import limpar_tela
+    limpar_tela()
+    #add carga horaria
     global id_evento
     nome = input("Nome: ")
     while True:
-        data_evento = input("Data do evento (dd/mm/aaaa): ")
-        print("Digite o horário que o evento irá ocorrer 07:00 - 18:00")
-        #posso fazer isso?
-        hora = input("Digite o horário do evento (h:min): ")
         try:
+            data_evento = input("Data do evento (dd/mm/aaaa): ")
             data = datetime.strptime(data_evento, "%d/%m/%Y").date()
-            horario = datetime.strptime(hora, "%H:%M").time()
             if data < date.today():
                 print("Não é possível cadastrar eventos em datas passadas.")
                 continue
-            if 7 > horario > 18:
+            
+            print("Digite o horário que o evento irá ocorrer (07:00 - 18:00)")
+            hora = input("Digite o horário do evento (h:min): ")
+            horario = datetime.strptime(hora, "%H:%M").time()
+            horario_inicio = time(7,0)
+            horario_fim = time(18,0)
+            if horario_inicio > horario and horario > horario_fim:
                 print("Horário não comercial. Escolha um horário entre as 07:00 às 18:00.")
                 continue
+            #posso fazer isso?
             break 
         except ValueError:
             print("Data/hora inválida. Tente novamente.")
@@ -37,6 +43,8 @@ def cadastrar_evento():
     print(f"Evento {evento['nome']} cadastrado com sucesso!")
 
 def exibir_eventos():
+    from util import limpar_tela
+    limpar_tela()
     if len(eventos) == 0:
         print("Nenhum evento cadastrado.")
         return
@@ -51,10 +59,11 @@ def exibir_eventos():
         #acho q n precisa de participante aq
 
 def listar_participantes_evento():
-    from util import ler_id, existencia, verificar_participantes
+    from util import ler_id, existencia, verificar_participantes, limpar_tela
     from participante import participantes
-    
+    limpar_tela()
     exibir_eventos()
+    print("")
     id_evento = ler_id("Digite o ID do evento: ")
     evento = existencia(id_evento, eventos)
     if not evento:
