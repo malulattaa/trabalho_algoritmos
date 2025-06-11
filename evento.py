@@ -99,3 +99,41 @@ def deletar_evento():
     eventos.remove(evento)
     print(f"Evento {evento['nome']} removido com sucesso.")
     
+#6: ("Filtrar evento por tema/data", cadastrar_evento),
+#7: ("Agrupar por tema", cadastrar_evento)
+def filtrar_evento():
+    from util import ler_id, existencia, verificar_participantes, menu_geral
+    print("Deseja filtrar o evento por tema ou data? ")
+
+    def filtrar_tema():
+        tema = menu_temas()
+        filtrar = list(filter(lambda x: x['tema'] == tema, eventos))
+        if not filtrar:
+            print("Não há eventos cadastrados nesse tema.")
+            return
+        for evento in filtrar:
+            print(f"{evento['nome']}")
+            print(f"Data: {evento['data_evento']} - Hora: {evento['hora_evento']}")
+            print(f"Código do evento: {evento['id']}")
+            print("")
+        def filtrar_data():
+            try:
+                data = input("Data do evento (dd/mm/aaaa): ")
+                data = datetime.strptime(data, "%d/%m/%Y").date()
+            except ValueError:
+                print("Data/hora inválida. Tente novamente.")
+                return
+            filtrar = (lambda x: x['data'] == data, eventos)
+            if not filtrar:
+                print("Não há eventos cadastrados nesse tema.")
+                return
+            for evento in filtrar:
+                print(f"{evento['nome']}")
+                print(f"Data: {evento['data_evento']} - Hora: {evento['hora_evento']}")
+                print(f"Código do evento: {evento['id']}")
+                print("")
+        opcoes = {
+            1: ("Tema", filtrar_tema),
+            2: ("Data", filtrar_data),
+        }
+        menu_geral(f'{"FILTRAR EVENTO":^40}', opcoes)
