@@ -31,9 +31,6 @@ def menu_geral(titulo, opcoes):
         funcao()
 def verificar_participantes(evento, participantes):
     return list(filter(lambda p: p['id'] in evento['participantes'], participantes))
-    """ if not filtrar:
-        print("Nenhum participante inscrito nesse evento.")
-    return filtrar"""
 
 def ler_id(mensagem="Digite o ID: "):
     from participante import participantes
@@ -45,7 +42,8 @@ def ler_id(mensagem="Digite o ID: "):
             print("ID inválido.")
 
 def existencia(id, lista):
-    item = next((i for i in lista if i['id'] == id), None)
-    if not item:
-        print(f"ID não encontrado.")
-    return item
+    item = list(filter(lambda x: x['id'] == id, lista))
+    if  item:
+        return item[0]
+    print("ID não encontrado.")
+    return None

@@ -45,6 +45,7 @@ def cadastrar_evento():
 def exibir_eventos():
     from util import limpar_tela
     limpar_tela()
+    #ta mostrando nenhum evento cadastrado e ainda sim mandando digitar o id
     if len(eventos) == 0:
         print("Nenhum evento cadastrado.")
         return
