@@ -117,7 +117,7 @@ def filtrar_evento():
         exibir_filtrados(list(filter(lambda x: x['tema'] == tema, eventos)))
     def filtrar_data():
         data = tratar_data()
-        exibir_filtrados((lambda x: x['data_evento'] == data, eventos))
+        exibir_filtrados(list(filter(lambda x: x['data_evento'] == data, eventos)))
     opcoes = {
         1: ("Tema", filtrar_tema),
         2: ("Data", filtrar_data),

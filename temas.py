@@ -13,6 +13,7 @@ def menu_temas():
     print("7 - Mobile")
     print("8 - Computação em Nuvem")
     print("9 - Robótica")
+    print("0 - Voltar")
     op = ler_opcao(len(temas))
     return temas[op - 1]
 
