@@ -4,27 +4,26 @@ from temas import menu_temas
 eventos = []
 id_evento = 1
 def cadastrar_evento():
-    from util import limpar_tela
+    from util import limpar_tela, tratar_data
     limpar_tela()
     #add carga horaria
     global id_evento
     nome = input("Nome: ")
     while True:
+        data = tratar_data()
+        if data < date.today():
+            print("Não é possível cadastrar eventos em datas passadas.")
+            continue
+        print("Digite o horário que o evento irá ocorrer (07:00 - 18:00)")
+        hora = input("Digite o horário do evento (h:min): ")
         try:
-            data_evento = input("Data do evento (dd/mm/aaaa): ")
-            data = datetime.strptime(data_evento, "%d/%m/%Y").date()
-            if data < date.today():
-                print("Não é possível cadastrar eventos em datas passadas.")
-                continue
-            
-            print("Digite o horário que o evento irá ocorrer (07:00 - 18:00)")
-            hora = input("Digite o horário do evento (h:min): ")
             horario = datetime.strptime(hora, "%H:%M").time()
             horario_inicio = time(7,0)
             horario_fim = time(18,0)
             if horario_inicio > horario and horario > horario_fim:
                 print("Horário não comercial. Escolha um horário entre as 07:00 às 18:00.")
                 continue
+            #arrumar isso aq pq eu coloquei 06:00 e ele validou
             #posso fazer isso?
             break 
         except ValueError:
@@ -102,7 +101,7 @@ def deletar_evento():
 #6: ("Filtrar evento por tema/data", cadastrar_evento),
 #7: ("Agrupar por tema", cadastrar_evento)
 def filtrar_evento():
-    from util import ler_id, existencia, verificar_participantes, menu_geral
+    from util import ler_id, existencia, verificar_participantes, menu_geral, tratar_data
     print("Deseja filtrar o evento por tema ou data? ")
 
     def exibir_filtrados(filtrado):
@@ -111,22 +110,14 @@ def filtrar_evento():
             return
         for evento in filtrado:
             print(f"{evento['id']} - {evento['nome']}")
-            print(f"{evento['data']} - {evento['hora']}")
+            print(f"{evento['data_evento']} - {evento['hora_evento']}")
             print(f"Tema: {evento['tema']}")
     def filtrar_tema():
         tema = menu_temas()
-        filtrar = list(filter(lambda x: x['tema'] == tema, eventos))
-        exibir_filtrados(filtrar)
+        exibir_filtrados(list(filter(lambda x: x['tema'] == tema, eventos)))
     def filtrar_data():
-        #acho que vale a pena criar uma func pra data
-        try:
-            data = input("Data do evento (dd/mm/aaaa): ")
-            data = datetime.strptime(data, "%d/%m/%Y").date()
-        except ValueError:
-            print("Data/hora inválida. Tente novamente.")
-            return
-        filtrar = (lambda x: x['data_evento'] == data, eventos)
-        exibir_filtrados(filtrar)
+        data = tratar_data()
+        exibir_filtrados((lambda x: x['data_evento'] == data, eventos))
     opcoes = {
         1: ("Tema", filtrar_tema),
         2: ("Data", filtrar_data),

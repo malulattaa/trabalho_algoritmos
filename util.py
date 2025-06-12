@@ -1,5 +1,6 @@
 import os
 from participante import cadastrar_participante
+from datetime import datetime
 
 def ler_opcao(lim_sup):
     #ler a opção ate que seja valido 
@@ -47,3 +48,12 @@ def existencia(id, lista):
         return item[0]
     print("ID não encontrado.")
     return None
+
+def tratar_data(mensagem= "Data do evento (dd/mm/aaaa): "):
+    try:
+        data_recebida = input(mensagem)
+        data = datetime.strptime(data_recebida, "%d/%m/%Y").date()
+        #arrumar a forma que mostra
+        return data
+    except ValueError:
+            print("Data/hora inválida. Tente novamente.")
