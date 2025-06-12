@@ -105,35 +105,30 @@ def filtrar_evento():
     from util import ler_id, existencia, verificar_participantes, menu_geral
     print("Deseja filtrar o evento por tema ou data? ")
 
+    def exibir_filtrados(filtrado):
+        if not filtrado:
+            print(f"Nenhum evento encontrado. ")
+            return
+        for evento in filtrado:
+            print(f"{evento['id']} - {evento['nome']}")
+            print(f"{evento['data']} - {evento['hora']}")
+            print(f"Tema: {evento['tema']}")
     def filtrar_tema():
         tema = menu_temas()
         filtrar = list(filter(lambda x: x['tema'] == tema, eventos))
-        if not filtrar:
-            print("Não há eventos cadastrados nesse tema.")
+        exibir_filtrados(filtrar)
+    def filtrar_data():
+        #acho que vale a pena criar uma func pra data
+        try:
+            data = input("Data do evento (dd/mm/aaaa): ")
+            data = datetime.strptime(data, "%d/%m/%Y").date()
+        except ValueError:
+            print("Data/hora inválida. Tente novamente.")
             return
-        for evento in filtrar:
-            print(f"{evento['nome']}")
-            print(f"Data: {evento['data_evento']} - Hora: {evento['hora_evento']}")
-            print(f"Código do evento: {evento['id']}")
-            print("")
-        def filtrar_data():
-            try:
-                data = input("Data do evento (dd/mm/aaaa): ")
-                data = datetime.strptime(data, "%d/%m/%Y").date()
-            except ValueError:
-                print("Data/hora inválida. Tente novamente.")
-                return
-            filtrar = (lambda x: x['data'] == data, eventos)
-            if not filtrar:
-                print("Não há eventos cadastrados nesse tema.")
-                return
-            for evento in filtrar:
-                print(f"{evento['nome']}")
-                print(f"Data: {evento['data_evento']} - Hora: {evento['hora_evento']}")
-                print(f"Código do evento: {evento['id']}")
-                print("")
-        opcoes = {
-            1: ("Tema", filtrar_tema),
-            2: ("Data", filtrar_data),
-        }
-        menu_geral(f'{"FILTRAR EVENTO":^40}', opcoes)
+        filtrar = (lambda x: x['data_evento'] == data, eventos)
+        exibir_filtrados(filtrar)
+    opcoes = {
+        1: ("Tema", filtrar_tema),
+        2: ("Data", filtrar_data),
+    }
+    menu_geral(f'{"FILTRAR EVENTO":^40}', opcoes)
