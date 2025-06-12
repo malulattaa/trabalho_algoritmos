@@ -50,6 +50,11 @@ def agrupar_tema():
             filtrar = list(filter(lambda x: x['tema'] == tema, eventos))
             qtde = len(filtrar)
             print(f"{tema} - {qtde}")
-    """ print(tema, end="")
-        qtde = contabilizar(tema)
-        print(qtde)"""
+        agrupar = {
+            tema: list(filter(lambda x: x['tema'] == tema, eventos)) for tema in temas
+        }
+        for tema, lista_evento in agrupar.items():
+            print(f"{tema} - {len(lista_evento)} eventos")
+            for evento in lista_evento:
+                print(f"{evento['id']} - {evento['nome']}")
+                #precisa de mais alguma coisa alem de id e nome?
