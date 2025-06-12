@@ -45,16 +45,11 @@ def agrupar_tema():
     #iteravel começa valendo 0
     #vai percorrendo um for pra passar por todos os elementos de temas
     #percorre a lista de eventos e ve quantos os i sao iguais
-    def contabilizar(tema):
-        for tema in temas:
-            filtrar = list(filter(lambda x: x['tema'] == tema, eventos))
-            qtde = len(filtrar)
-            print(f"{tema} - {qtde}")
-        agrupar = {
-            tema: list(filter(lambda x: x['tema'] == tema, eventos)) for tema in temas
-        }
-        for tema, lista_evento in agrupar.items():
-            print(f"{tema} - {len(lista_evento)} eventos")
-            for evento in lista_evento:
-                print(f"{evento['id']} - {evento['nome']}")
-                #precisa de mais alguma coisa alem de id e nome?
+    agrupar = {
+        tema: list(filter(lambda x: x['tema'] == tema, eventos)) for tema in temas
+    }
+    for tema, lista_evento in agrupar.items():
+        print(f"{tema} - {len(lista_evento)} eventos")
+        for evento in lista_evento:
+            print(f"{evento['id']} - {evento['nome']}")
+            #precisa de mais alguma coisa alem de id e nome?
