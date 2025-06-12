@@ -1,9 +1,10 @@
 from collections import Counter
+
+temas = ["Inteligência Artificial", "Web", "Segurança", "Rede", "Programação", "Banco de dados", "Mobile", "Computação em Nuvem", "Robótica"]
 def menu_temas():
     from util import ler_opcao 
     #solução temporaria
     #limpar
-    temas = ["Inteligência Artificial", "Web", "Segurança", "Rede", "Programação", "Banco de dados", "Mobile", "Computação em Nuvem", "Robótica"]
     print("_" * 15, "TEMAS", "_" * 15)
     print("1 - Inteligência Artificial - IA")
     print("2 - Web")
@@ -38,7 +39,6 @@ def trocar_tema():
 #7: ("Agrupar por tema", cadastrar_evento)
 
 def agrupar_tema():
-    from temas import temas
     from evento import eventos
     #ideia: mostrar todos os temas e a quantidade de eventos respectiva a aquele tema
     #em seguida: mostrar os eventos (nome e id?)
@@ -52,4 +52,5 @@ def agrupar_tema():
         print(f"{tema} - {len(lista_evento)} eventos")
         for evento in lista_evento:
             print(f"{evento['id']} - {evento['nome']}")
+            print("")
             #precisa de mais alguma coisa alem de id e nome?
