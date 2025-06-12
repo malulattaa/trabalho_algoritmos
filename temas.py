@@ -1,3 +1,4 @@
+from collections import Counter
 def menu_temas():
     from util import ler_opcao 
     #solução temporaria
@@ -34,3 +35,21 @@ def trocar_tema():
         evento['tema'] = tema_novo
         print(f"O tema do evento {evento['nome']} foi alterado para {tema_novo}.")
     
+#7: ("Agrupar por tema", cadastrar_evento)
+
+def agrupar_tema():
+    from temas import temas
+    from evento import eventos
+    #ideia: mostrar todos os temas e a quantidade de eventos respectiva a aquele tema
+    #em seguida: mostrar os eventos (nome e id?)
+    #iteravel começa valendo 0
+    #vai percorrendo um for pra passar por todos os elementos de temas
+    #percorre a lista de eventos e ve quantos os i sao iguais
+    def contabilizar(tema):
+        for tema in temas:
+            filtrar = list(filter(lambda x: x['tema'] == tema, eventos))
+            qtde = len(filtrar)
+            print(f"{tema} - {qtde}")
+    """ print(tema, end="")
+        qtde = contabilizar(tema)
+        print(qtde)"""

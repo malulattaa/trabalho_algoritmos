@@ -23,6 +23,7 @@ def menu_eventos():
         5: ("Trocar tema de um evento", trocar_tema),
         6: ("Filtrar evento por tema/data", filtrar_evento),
         #7: ("Agrupar por tema", cadastrar_evento),
+        #contabilizar quantos eventos tem aquel tema
     }
     menu_geral(f'{"EVENTO":^40}', opcoes)
 def menu_participantes():
