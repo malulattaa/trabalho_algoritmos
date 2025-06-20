@@ -46,11 +46,11 @@ def agrupar_tema():
     #vai percorrendo um for pra passar por todos os elementos de temas
     #percorre a lista de eventos e ve quantos os i sao iguais
     agrupar = {
-        tema: list(filter(lambda x: x['tema'] == tema, eventos)) for tema in temas
+        tema: list(filter(lambda x: x['tema'] == tema, eventos.values())) for tema in temas
     }
     for tema, lista_evento in agrupar.items():
         print(f"{tema} - {len(lista_evento)} eventos")
         for evento in lista_evento:
-            print(f"{evento['id']} - {evento['nome']}")
+            print(f"{evento['nome']}")
             print("")
             #precisa de mais alguma coisa alem de id e nome?

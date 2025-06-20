@@ -1,18 +1,17 @@
 from temas import menu_temas
 from evento import exibir_eventos
 
-participantes = []
-
+participantes = {}
 id_participante = 1
 def cadastrar_participante():
+    global id_participante
     from util import limpar_tela
     limpar_tela()
-    global id_participante
     nome = input("Nome completo: ")
     #ver se digitar nome vazio
     email = input("e-mail: ")
     
-    emails_existentes = set(p['email'] for p in participantes)
+    emails_existentes = set(p['email'] for id, p in participantes.items())
     
     if email in emails_existentes:
         print("Esse e-mail já está sendo usado.")
@@ -20,18 +19,17 @@ def cadastrar_participante():
     
     preferencia = []
     while input("Deseja adicionar uma preferência temática? (S para sim)/(N para não): ").upper().strip() == 'S':
+        #se eu digitar qlq outra coisa sem ser s ele leva como n
         print(f'{"PREFERÊNCIA TEMÁTICA":^40}')
         tema = menu_temas() 
         preferencia.append(tema)
         
-    participante = {
-        'id': id_participante,
+    participantes[id_participante] = {
         'nome' : nome,
         'email' : email, #ver se pode por e-mal
         'pref_tematica' : preferencia,
         'eventos' : []
     }
-    participantes.append(participante)
     id_participante += 1
     print(f"Participante {nome} cadastrado com sucesso!")
     
@@ -41,15 +39,16 @@ def procurar_participante():
     participante = existencia(id_participante, participantes)
     if not participante: 
         return
-    print(f"Participante {participante['id']}:")
+    print(f"Participante {id_participante}:")
     print(f"Nome: {participante['nome']}")
     print(f"E-mail: {participante['email']}")
     print(f"Preferências temáticas: ")
-    print(",".join(participante['pref_tematica']) if participante['pref_tematica'] else "O participante não tem preferência temática.")
+    print(",".join(participante['pref_tematica']) if participante['pref_tematica'] else "O participante não tem preferência temática")
     print(f"Eventos: ")
-    print(",".join(participante['eventos']) if participante['eventos'] else "O participante não está inscrito em eventos.")
+    print(",".join(str(e) for e in participante['eventos']) if participante['eventos'] else "O participante não está inscrito em eventos")
 
 def atualizar_email():
+    
     from util import ler_id, existencia
     id_participante = ler_id("Digite o id do participante que deseja buscar: ")
     participante = existencia(id_participante, participantes)
@@ -65,11 +64,11 @@ def atualizar_email():
 
 def deletar_participante():
     from util import ler_id, existencia
-    id_participante = ler_id("Digite o id do participante que deseja buscar: ")
+    id_participante = ler_id("Digite o id do participante que deseja deletar: ")
     participante = existencia(id_participante, participantes)
     if not participante:
         return
-    participantes.remove(participante)
+    del participantes[id_participante]
     print(f"Participante {participante['nome']} removido com sucesso.")
     
 def inscricao_evento():

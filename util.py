@@ -31,7 +31,7 @@ def menu_geral(titulo, opcoes):
         _, funcao = opcoes[op]
         funcao()
 def verificar_participantes(evento, participantes):
-    return list(filter(lambda p: p['id'] in evento['participantes'], participantes))
+    return list(filter(lambda p: p[0] in evento['participantes'], participantes.items()))
 
 def ler_id(mensagem="Digite o ID: "):
     from participante import participantes
@@ -42,10 +42,10 @@ def ler_id(mensagem="Digite o ID: "):
         except ValueError:
             print("ID inválido.")
 
-def existencia(id, lista):
-    item = list(filter(lambda x: x['id'] == id, lista))
-    if  item:
-        return item[0]
+def existencia(id, dicionario):
+    item = dicionario.get(id)
+    if item:
+        return item
     print("ID não encontrado.")
     return None
 

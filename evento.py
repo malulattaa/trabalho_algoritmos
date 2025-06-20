@@ -1,13 +1,15 @@
 from datetime import datetime, date, time
 from temas import menu_temas
 
-eventos = []
 id_evento = 1
+eventos = {}
 def cadastrar_evento():
     from util import limpar_tela, tratar_data
+    global id_evento
+    
     limpar_tela()
     #add carga horaria
-    global id_evento
+    
     nome = input("Nome: ")
     while True:
         data = tratar_data()
@@ -28,8 +30,8 @@ def cadastrar_evento():
             break 
         except ValueError:
             print("Data/hora inválida. Tente novamente.")
-    evento = {
-        'id' : id_evento,
+        
+    eventos[id_evento] = {
         'nome' : nome,
         'data_evento' : data,
         'hora_evento' : horario,
@@ -37,9 +39,8 @@ def cadastrar_evento():
         'participantes' : []
         
     }
-    eventos.append(evento)
+    print(f"Evento {eventos[id_evento]['nome']} cadastrado com sucesso!")
     id_evento += 1
-    print(f"Evento {evento['nome']} cadastrado com sucesso!")
 
 def exibir_eventos():
     from util import limpar_tela
@@ -50,9 +51,9 @@ def exibir_eventos():
         return
 
     print("Eventos cadastrados:")
-    for event in sorted(eventos, key=lambda e: e['data_evento']):
+    for id, event in sorted(eventos.items(), key=lambda e: e[1]['data_evento']):
         print(f"Data: {event['data_evento']} - Hora: {event['hora_evento']}")
-        print(f"Código do evento: {event['id']}")
+        print(f"Código do evento: {id}")
         print(f"Nome: {event['nome']}")
         print(f"Tema: {event['tema']}")
         print("")
@@ -72,8 +73,8 @@ def listar_participantes_evento():
     inscritos = verificar_participantes(evento, participantes)
     if inscritos:
         print(f"Participantes inscritos no evento {evento['nome']}: ")
-        for p in inscritos:
-            print(f"{p['nome']} - {p['email']}")
+        for id, p in inscritos:
+            print(f"(ID: {id}) - {p['nome']}: {p['email']}")
     else:
         print("Esse evento não possui participantes.")
 def deletar_evento():
@@ -95,7 +96,7 @@ def deletar_evento():
         print("Delete os participantes do evento antes de excluí-lo.")
         return
     
-    eventos.remove(evento)
+    del eventos[id_evento]
     print(f"Evento {evento['nome']} removido com sucesso.")
     
 #6: ("Filtrar evento por tema/data", cadastrar_evento),
@@ -109,15 +110,15 @@ def filtrar_evento():
             print(f"Nenhum evento encontrado. ")
             return
         for evento in filtrado:
-            print(f"{evento['id']} - {evento['nome']}")
+            print(f"{evento['nome']}")
             print(f"{evento['data_evento']} - {evento['hora_evento']}")
             print(f"Tema: {evento['tema']}")
     def filtrar_tema():
         tema = menu_temas()
-        exibir_filtrados(list(filter(lambda x: x['tema'] == tema, eventos)))
+        exibir_filtrados(list(filter(lambda x: x['tema'] == tema, eventos.values())))
     def filtrar_data():
         data = tratar_data()
-        exibir_filtrados(list(filter(lambda x: x['data_evento'] == data, eventos)))
+        exibir_filtrados(list(filter(lambda x: x['data_evento'] == data, eventos.values())))
     opcoes = {
         1: ("Tema", filtrar_tema),
         2: ("Data", filtrar_data),
