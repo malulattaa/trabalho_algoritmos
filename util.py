@@ -1,5 +1,4 @@
 import os
-from participante import cadastrar_participante
 from datetime import datetime
 
 def ler_opcao(lim_sup):
@@ -31,11 +30,10 @@ def menu_geral(titulo, opcoes):
         _, funcao = opcoes[op]
         funcao()
 def verificar_participantes(evento, participantes):
-    return list(filter(lambda p: p[0] in evento['participantes'], participantes.items()))
+    return {id: p for id, p in participantes.items() if id in evento['participantes']}
+#aqui dava pra usar filter mas tava retornando uma lista de tuplas, por isso mudei pra dicio, pra ficar melhor pra tratar
 
 def ler_id(mensagem="Digite o ID: "):
-    from participante import participantes
-    from evento import eventos
     while True:
         try:
             return int(input(mensagem))
@@ -50,10 +48,11 @@ def existencia(id, dicionario):
     return None
 
 def tratar_data(mensagem= "Data do evento (dd/mm/aaaa): "):
-    try:
-        data_recebida = input(mensagem)
-        data = datetime.strptime(data_recebida, "%d/%m/%Y").date()
-        #arrumar a forma que mostra
-        return data
-    except ValueError:
-            print("Data/hora inválida. Tente novamente.")
+    while True: 
+        try:
+            data_recebida = input(mensagem)
+            data = datetime.strptime(data_recebida, "%d/%m/%Y").date()
+            #arrumar a forma que mostra
+            return data
+        except ValueError:
+                print("Data/hora inválida. Tente novamente.")

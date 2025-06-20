@@ -1,8 +1,10 @@
 from collections import Counter
+from util import ler_id, existencia, limpar_tela, ler_opcao
+
 
 temas = ["Inteligência Artificial", "Web", "Segurança", "Rede", "Programação", "Banco de dados", "Mobile", "Computação em Nuvem", "Robótica"]
 def menu_temas():
-    from util import ler_opcao 
+
     #solução temporaria
     #limpar
     print("_" * 15, "TEMAS", "_" * 15)
@@ -17,11 +19,13 @@ def menu_temas():
     print("9 - Robótica")
     print("0 - Voltar")
     op = ler_opcao(len(temas))
+    # if op == 0:
+    #     return None
     return temas[op - 1]
 
 def trocar_tema():
-    from util import existencia, ler_id, limpar_tela
     from evento import eventos, exibir_eventos
+    from temas import menu_temas 
     #em caso de trocar o tema pelo tema que ja etsa, escrever algo
     limpar_tela()
     exibir_eventos()
@@ -40,17 +44,12 @@ def trocar_tema():
 
 def agrupar_tema():
     from evento import eventos
-    #ideia: mostrar todos os temas e a quantidade de eventos respectiva a aquele tema
-    #em seguida: mostrar os eventos (nome e id?)
-    #iteravel começa valendo 0
-    #vai percorrendo um for pra passar por todos os elementos de temas
-    #percorre a lista de eventos e ve quantos os i sao iguais
     agrupar = {
-        tema: list(filter(lambda x: x['tema'] == tema, eventos.values())) for tema in temas
+        tema: {id: evento for id, evento in eventos.items() if evento['tema'] == tema} for tema in temas
     }
     for tema, lista_evento in agrupar.items():
         print(f"{tema} - {len(lista_evento)} eventos")
-        for evento in lista_evento:
-            print(f"{evento['nome']}")
+        for id, evento in lista_evento.items():
+            print(f" - {id} - {evento['nome']}")
             print("")
             #precisa de mais alguma coisa alem de id e nome?

@@ -1,28 +1,35 @@
 from datetime import datetime, date, time
-from temas import menu_temas
+from util import limpar_tela, tratar_data, ler_id, existencia, verificar_participantes, menu_geral
+
 
 id_evento = 1
 eventos = {}
 def cadastrar_evento():
-    from util import limpar_tela, tratar_data
+    
+    from temas import menu_temas
     global id_evento
     
     limpar_tela()
     #add carga horaria
     
     nome = input("Nome: ")
+    
     while True:
         data = tratar_data()
         if data < date.today():
             print("Não é possível cadastrar eventos em datas passadas.")
             continue
+        
         print("Digite o horário que o evento irá ocorrer (07:00 - 18:00)")
         hora = input("Digite o horário do evento (h:min): ")
+        
         try:
             horario = datetime.strptime(hora, "%H:%M").time()
+            
             horario_inicio = time(7,0)
             horario_fim = time(18,0)
-            if horario_inicio > horario and horario > horario_fim:
+            
+            if horario_inicio <= horario <= horario_fim:
                 print("Horário não comercial. Escolha um horário entre as 07:00 às 18:00.")
                 continue
             #arrumar isso aq pq eu coloquei 06:00 e ele validou
@@ -43,9 +50,10 @@ def cadastrar_evento():
     id_evento += 1
 
 def exibir_eventos():
-    from util import limpar_tela
     limpar_tela()
+    
     #ta mostrando nenhum evento cadastrado e ainda sim mandando digitar o id
+    # porque algumas outras funções chamam o exibir_eventos() antes de pedir ID, mas essa função em si só exibe.
     if len(eventos) == 0:
         print("Nenhum evento cadastrado.")
         return
@@ -60,7 +68,6 @@ def exibir_eventos():
         #acho q n precisa de participante aq
 
 def listar_participantes_evento():
-    from util import ler_id, existencia, verificar_participantes, limpar_tela
     from participante import participantes
     limpar_tela()
     exibir_eventos()
@@ -73,14 +80,12 @@ def listar_participantes_evento():
     inscritos = verificar_participantes(evento, participantes)
     if inscritos:
         print(f"Participantes inscritos no evento {evento['nome']}: ")
-        for id, p in inscritos:
+        for id, p in inscritos.items():
             print(f"(ID: {id}) - {p['nome']}: {p['email']}")
     else:
         print("Esse evento não possui participantes.")
 def deletar_evento():
-    from util import ler_id, existencia, verificar_participantes
     from participante import participantes
-    
     print("Verifique se há participantes inscritos nesse evento antes de deletá-lo.")
     print("")
     exibir_eventos()
@@ -102,15 +107,15 @@ def deletar_evento():
 #6: ("Filtrar evento por tema/data", cadastrar_evento),
 #7: ("Agrupar por tema", cadastrar_evento)
 def filtrar_evento():
-    from util import ler_id, existencia, verificar_participantes, menu_geral, tratar_data
+    from temas import menu_temas
     print("Deseja filtrar o evento por tema ou data? ")
 
     def exibir_filtrados(filtrado):
         if not filtrado:
             print(f"Nenhum evento encontrado. ")
             return
-        for evento in filtrado:
-            print(f"{evento['nome']}")
+        for id, evento in eventos.items():
+            print(f"ID: {id} - {evento['nome']}")
             print(f"{evento['data_evento']} - {evento['hora_evento']}")
             print(f"Tema: {evento['tema']}")
     def filtrar_tema():

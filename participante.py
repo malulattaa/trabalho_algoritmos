@@ -1,11 +1,11 @@
+from util import limpar_tela, ler_id, existencia
 from temas import menu_temas
-from evento import exibir_eventos
+from evento import eventos, exibir_eventos
 
 participantes = {}
 id_participante = 1
 def cadastrar_participante():
     global id_participante
-    from util import limpar_tela
     limpar_tela()
     nome = input("Nome completo: ")
     #ver se digitar nome vazio
@@ -34,7 +34,7 @@ def cadastrar_participante():
     print(f"Participante {nome} cadastrado com sucesso!")
     
 def procurar_participante():
-    from util import ler_id, existencia
+
     id_participante = ler_id("Digite o id do participante que deseja buscar: ")
     participante = existencia(id_participante, participantes)
     if not participante: 
@@ -46,10 +46,9 @@ def procurar_participante():
     print(",".join(participante['pref_tematica']) if participante['pref_tematica'] else "O participante não tem preferência temática")
     print(f"Eventos: ")
     print(",".join(str(e) for e in participante['eventos']) if participante['eventos'] else "O participante não está inscrito em eventos")
-
+    #arrumar aq pra mostrar o nome
 def atualizar_email():
     
-    from util import ler_id, existencia
     id_participante = ler_id("Digite o id do participante que deseja buscar: ")
     participante = existencia(id_participante, participantes)
     if not participante:
@@ -63,7 +62,7 @@ def atualizar_email():
     print(f"O e-mail do participante {participante['nome']} foi alterado com sucesso para {email_novo}.")
 
 def deletar_participante():
-    from util import ler_id, existencia
+
     id_participante = ler_id("Digite o id do participante que deseja deletar: ")
     participante = existencia(id_participante, participantes)
     if not participante:
@@ -72,11 +71,10 @@ def deletar_participante():
     print(f"Participante {participante['nome']} removido com sucesso.")
     
 def inscricao_evento():
-    from util import existencia, ler_id
-    from evento import eventos, exibir_eventos
+    
     exibir_eventos()
     #se nenhum evento tiver cadastrado ja para
-    
+    #mostrar id e nome do pas participantes
     id_evento = ler_id("Digite o ID do evento: ")
     evento = existencia(id_evento, eventos)
     if not evento:

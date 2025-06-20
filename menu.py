@@ -9,7 +9,7 @@ def menu_principal():
     opcoes = {
         1: ("Gerenciar participantes", menu_participantes),
         2: ("Gerenciar eventos", menu_eventos),
-        3: ("Estastísticas e relatórios", estatisticas),
+        3: ("Estatísticas e relatórios", estatisticas),
     }
     menu_geral(f'{"MENU":^40}', opcoes)
 
@@ -26,7 +26,9 @@ def menu_eventos():
         #contabilizar quantos eventos tem aquel tema
     }
     menu_geral(f'{"EVENTO":^40}', opcoes)
+    
 def menu_participantes():
+    limpar_tela()
     opcoes = {
         1: ("Cadastrar novo participante", cadastrar_participante),
         2: ("Realizar inscrição em eventos", inscricao_evento),
