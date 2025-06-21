@@ -11,7 +11,7 @@ def menu_principal():
         2: ("Gerenciar eventos", menu_eventos),
         3: ("Estatísticas e relatórios", estatisticas),
     }
-    menu_geral(f'{"MENU":^40}', opcoes)
+    menu_geral(f'{"_" * 15, "MENU", 15 * "_"}', opcoes)
 
 def menu_eventos():
     limpar_tela()
@@ -25,7 +25,7 @@ def menu_eventos():
         7: ("Agrupar por tema", agrupar_tema),
         #contabilizar quantos eventos tem aquel tema
     }
-    menu_geral(f'{"EVENTO":^40}', opcoes)
+    menu_geral(f'{"_" * 15,"EVENTO", 15 * "_",}', opcoes)
     
 def menu_participantes():
     limpar_tela()
@@ -36,6 +36,6 @@ def menu_participantes():
         4: ("Atualizar e-mail", atualizar_email),
         5: ("Remover participante", deletar_participante),
     }
-    menu_geral(f'{"PARTICIPANTE":^40}', opcoes)
+    menu_geral(f'{"_" * 15,"PARTICIPANTE", 15* "_"}', opcoes)
 
 

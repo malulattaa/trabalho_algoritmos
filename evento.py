@@ -11,9 +11,14 @@ def cadastrar_evento():
     
     limpar_tela()
     #add carga horaria
+
+    nomes_existentes = set(e['nome'] for id, e in eventos.items())
     
     nome = input("Nome: ")
     
+    if nome in nomes_existentes:
+        print("Esse evento já foi cadastrado. Digite outro nome.")
+        
     while True:
         data = tratar_data()
         if data < date.today():
@@ -136,4 +141,4 @@ def filtrar_evento():
         1: ("Tema", filtrar_tema),
         2: ("Data", filtrar_data),
     }
-    menu_geral(f'{"FILTRAR EVENTO":^40}', opcoes)
+    menu_geral(f'{"_" * 15, "FILTRAR EVENTO", 15 * "_"}', opcoes)

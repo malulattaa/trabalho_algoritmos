@@ -87,6 +87,6 @@ def inscricao_evento():
     if id_evento in participante['eventos']:
         print("O participante já está inscrito nesse evento!")
         return
-    participante['eventos'].append(id_evento)
+    participante['eventos'].append(evento['nome'])
     evento['participantes'].append(id_participante)
     print(f"{participante['nome']} inscrito no evento {evento['nome']} com sucesso!")
