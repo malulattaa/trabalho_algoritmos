@@ -8,6 +8,7 @@ def menu_temas():
     #solução temporaria
     #limpar
     print("_" * 15, "TEMAS", "_" * 15)
+    #por isso com meni geral
     print("1 - Inteligência Artificial - IA")
     print("2 - Web")
     print("3 - Segurança")
@@ -39,8 +40,6 @@ def trocar_tema():
         tema_novo = menu_temas()
         evento['tema'] = tema_novo
         print(f"O tema do evento {evento['nome']} foi alterado para {tema_novo}.")
-    
-#7: ("Agrupar por tema", cadastrar_evento)
 
 def agrupar_tema():
     from evento import eventos
