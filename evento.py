@@ -138,11 +138,11 @@ def filtrar_evento():
             
     def filtrar_tema():
         tema = menu_temas()
-        exibir_filtrados(list(filter(lambda x: x['tema'] == tema, eventos.values())))
+        exibir_filtrados((id_evento, evento) for id_evento, evento in eventos.items if evento['tema'] == tema)
         
     def filtrar_data():
         data = tratar_data()
-        exibir_filtrados(list(filter(lambda x: x['data_evento'] == data, eventos.values())))
+        exibir_filtrados((id_evento, evento) for id_evento, evento in eventos.items if evento['data_evento'] == data)
         
     opcoes = {
         1: ("Tema", filtrar_tema),
