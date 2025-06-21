@@ -59,7 +59,7 @@ def tratar_data(mensagem= "Data do evento (dd/mm/aaaa): "):
             #arrumar a forma que mostra
             return data
         except ValueError:
-                print("Data/hora inválida. Tente novamente.")
+                print("Data inválida. Tente novamente.")
                 
 def verificar_email(email, dicionario):
     

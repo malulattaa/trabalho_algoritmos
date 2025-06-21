@@ -128,24 +128,26 @@ def filtrar_evento():
     print("Deseja filtrar o evento por tema ou data? ")
 
     def exibir_filtrados(filtrado):
-        if not filtrado:
-            print(f"Nenhum evento encontrado. ")
-            return
-        
+        # if not filtrado:
+        #     print(f"Nenhum evento encontrado. ")
+        #     return
         limpar_tela()
-        for id_evento, evento in filtrado:
-            print(f"ID: {id_evento} - {evento['nome']}")
-            print(f"{evento['data_evento'].strftime('%d/%m/%Y')} - {evento['hora_evento']}")
-            print(f"Tema: {evento['tema']}")
-            print("_" * 50)
+        if filtrado:
+            for id_evento, evento in filtrado:
+                print(f"ID: {id_evento} - {evento['nome']}")
+                print(f"{evento['data_evento'].strftime('%d/%m/%Y')} - {evento['hora_evento']}")
+                print(f"Tema: {evento['tema']}")
+                print("_" * 50)
+        else:
+            print(f"Nenhum evento encontrado. ")
             
     def filtrar_tema():
         tema = menu_temas()
-        exibir_filtrados((id_evento, evento) for id_evento, evento in eventos.items() if evento['tema'] == tema)
+        exibir_filtrados(list(filter(lambda item: item[1]['tema'] == tema, eventos.items())))
         
     def filtrar_data():
         data = tratar_data()
-        exibir_filtrados((id_evento, evento) for id_evento, evento in eventos.items() if evento['data_evento'] == data)
+        exibir_filtrados(list(filter(lambda item: item[1]['data_evento'] == data, eventos.items())))
         
     opcoes = {
         1: ("Tema", filtrar_tema),
