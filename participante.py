@@ -34,7 +34,6 @@ def cadastrar_participante():
     print(f"Participante {nome} cadastrado com sucesso!")
     
 def procurar_participante():
-
     id_participante = ler_id("Digite o id do participante que deseja buscar: ")
     participante = existencia(id_participante, participantes)
     if not participante: 
@@ -45,12 +44,12 @@ def procurar_participante():
     print(f"Preferências temáticas: ")
     print(",".join(participante['pref_tematica']) if participante['pref_tematica'] else "O participante não tem preferência temática")
     print(f"Eventos: ")
-    if participantes['eventos']:
-        print(",".join(eventos[id]['nome'] for id in participantes['eventos'] if id in eventos))
+    if participante['eventos']:
+        print(",".join(eventos[id]['nome'] for id in participante['eventos'] if id in eventos))
     else:
         print("O participante não está inscrito em eventos.")
+        
 def atualizar_email():
-    
     id_participante = ler_id("Digite o id do participante que deseja buscar: ")
     participante = existencia(id_participante, participantes)
     if not participante:
@@ -64,7 +63,6 @@ def atualizar_email():
     print(f"O e-mail do participante {participante['nome']} foi alterado com sucesso para {email_novo}.")
 
 def deletar_participante():
-
     id_participante = ler_id("Digite o id do participante que deseja deletar: ")
     participante = existencia(id_participante, participantes)
     if not participante:
