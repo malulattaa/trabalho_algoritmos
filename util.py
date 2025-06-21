@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 
 def ler_opcao(lim_sup):
-    #ler a opção ate que seja valido 
+    #le a opcao do usuario e só aceita um numero int dentro do intervalo estipulado como valido
     while True:
         try:
             op = int(input("Escolha a opção: "))
@@ -16,6 +16,9 @@ def ler_opcao(lim_sup):
 
 def limpar_tela():
     os.system("cls" if os.name == 'nt' else 'clear')
+    #os.system() - Permite executar comandos do sistema operacional a partir do Python.
+    #os.name - Retorna o nome do sistema operacional, nesse caso, windows é nt
+    #Executa o comando cls (limpar tela no Windows)
     
 def menu_geral(titulo, opcoes):
     while True:
@@ -25,6 +28,7 @@ def menu_geral(titulo, opcoes):
             print(f"{num_opcao}: {descricao}")
         print("0 - Voltar")
         op = ler_opcao(max(opcoes.keys()))
+        #ler a opcao e o limite superior que ela recebe é o maior numero que existe nas chaves de opções
         if op == 0:
             break
         _, funcao = opcoes[op]

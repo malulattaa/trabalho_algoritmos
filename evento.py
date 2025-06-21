@@ -59,7 +59,11 @@ def exibir_eventos():
         return
 
     print("Eventos cadastrados:")
+    
     for id, event in sorted(eventos.items(), key=lambda e: e[1]['data_evento']):
+        #aqui, evento.items() é uma tupla (id, dados_do_evento) onde dados_do_evento é um dicionario
+        #e pega a data do evento do indice 1 da tupla que é dicio de evento
+        
         print(f"Data: {event['data_evento']} - Hora: {event['hora_evento']}")
         print(f"Código do evento: {id}")
         print(f"Nome: {event['nome']}")
@@ -69,15 +73,20 @@ def exibir_eventos():
 
 def listar_participantes_evento():
     from participante import participantes
+    
     limpar_tela()
     exibir_eventos()
     print("")
+    
     id_evento = ler_id("Digite o ID do evento: ")
+    
     evento = existencia(id_evento, eventos)
     if not evento:
         print("Evento não encontrado.")
         return
+    
     inscritos = verificar_participantes(evento, participantes)
+    
     if inscritos:
         print(f"Participantes inscritos no evento {evento['nome']}: ")
         for id, p in inscritos.items():
@@ -104,8 +113,6 @@ def deletar_evento():
     del eventos[id_evento]
     print(f"Evento {evento['nome']} removido com sucesso.")
     
-#6: ("Filtrar evento por tema/data", cadastrar_evento),
-#7: ("Agrupar por tema", cadastrar_evento)
 def filtrar_evento():
     from temas import menu_temas
     print("Deseja filtrar o evento por tema ou data? ")
@@ -114,8 +121,9 @@ def filtrar_evento():
         if not filtrado:
             print(f"Nenhum evento encontrado. ")
             return
-        for id, evento in eventos.items():
-            print(f"ID: {id} - {evento['nome']}")
+        for evento in filtrado:
+            id_evento = [id for id, e in eventos.items() if e==evento[0]]
+            print(f"ID: {id_evento} - {evento['nome']}")
             print(f"{evento['data_evento']} - {evento['hora_evento']}")
             print(f"Tema: {evento['tema']}")
     def filtrar_tema():
