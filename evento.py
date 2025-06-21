@@ -129,17 +129,21 @@ def filtrar_evento():
         if not filtrado:
             print(f"Nenhum evento encontrado. ")
             return
-        for evento in filtrado:
-            id_evento = [id for id in eventos.items() if id==eventos[0]]
+        
+        for id_evento, evento in filtrado:
             print(f"ID: {id_evento} - {evento['nome']}")
             print(f"{evento['data_evento'].strftime('%d/%m/%Y')} - {evento['hora_evento']}")
             print(f"Tema: {evento['tema']}")
+            print("_" * 30)
+            
     def filtrar_tema():
         tema = menu_temas()
         exibir_filtrados(list(filter(lambda x: x['tema'] == tema, eventos.values())))
+        
     def filtrar_data():
         data = tratar_data()
         exibir_filtrados(list(filter(lambda x: x['data_evento'] == data, eventos.values())))
+        
     opcoes = {
         1: ("Tema", filtrar_tema),
         2: ("Data", filtrar_data),
