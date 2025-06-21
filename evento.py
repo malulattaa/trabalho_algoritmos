@@ -24,7 +24,9 @@ def cadastrar_evento():
         if data < date.today():
             print("Não é possível cadastrar eventos em datas passadas.")
             continue
+        break
         
+    while True:
         print("Digite o horário que o evento irá ocorrer (07:00 - 18:00)")
         hora = input("Digite o horário do evento (h:min): ")
         
@@ -34,14 +36,15 @@ def cadastrar_evento():
             horario_inicio = time(7,0)
             horario_fim = time(18,0)
             
-            if horario_inicio >= horario >= horario_fim:
-                print("Horário não comercial. Escolha um horário entre as 07:00 às 18:00.")
+            if horario_inicio > horario or horario > horario_fim:
+                print("Horário não comercial.")
+                limpar_tela()
                 continue
             #arrumar isso aq pq eu coloquei 06:00 e ele validou
             #posso fazer isso?
             break 
         except ValueError:
-            print("Data/hora inválida. Tente novamente.")
+            print("Hora inválida. Tente novamente.")
         #criar um while true separado pra data e hoario pq quando erra o horario tem que digitar a data dnv
     eventos[id_evento] = {
         'nome' : nome,
