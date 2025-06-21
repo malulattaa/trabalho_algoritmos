@@ -45,8 +45,10 @@ def procurar_participante():
     print(f"Preferências temáticas: ")
     print(",".join(participante['pref_tematica']) if participante['pref_tematica'] else "O participante não tem preferência temática")
     print(f"Eventos: ")
-    print(",".join(str(e) for e in participante['eventos']) if participante['eventos'] else "O participante não está inscrito em eventos")
-    #arrumar aq pra mostrar o nome
+    if participantes['eventos']:
+        print(",".join(eventos[id]['nome'] for id in participantes['eventos'] if id in eventos))
+    else:
+        print("O participante não está inscrito em eventos.")
 def atualizar_email():
     
     id_participante = ler_id("Digite o id do participante que deseja buscar: ")
