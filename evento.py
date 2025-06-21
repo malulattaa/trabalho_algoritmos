@@ -1,20 +1,27 @@
 from datetime import datetime, date, time
 from util import limpar_tela, tratar_data, ler_id, existencia, verificar_participantes, menu_geral
+from temas import menu_temas
 
 
 id_evento = 1
 eventos = {}
+
+def mostrar_evento(id, evento):
+    print(f"Data: {evento['data_evento'].strftime('%d/%m/%Y')} - Hora: {evento['hora_evento']}")
+    print(f"Código do evento: {id}")
+    print(f"Nome: {evento['nome']}")
+    print(f"Tema: {evento['tema']}")
+    print("")
+        
 def cadastrar_evento():
     
-    from temas import menu_temas
     global id_evento
     
     limpar_tela()
     #add carga horaria
+    nomes_existentes = set(e['nome'] for e in eventos.values())
     while True: 
         nome = input("Nome: ")
-        nomes_existentes = set(e['nome'] for e in eventos.values())
-        
         if nome in nomes_existentes:
             print("Esse evento já foi cadastrado. Digite outro nome.")
         else:
@@ -34,19 +41,14 @@ def cadastrar_evento():
         try:
             horario = datetime.strptime(hora, "%H:%M").time()
             
-            horario_inicio = time(7,0)
-            horario_fim = time(18,0)
-            
-            if horario < horario_inicio or horario > horario_fim:
+            if horario < time(7,0) or horario > time(18, 0):
                 print("Horário não comercial.")
                 limpar_tela()
                 continue
-            #arrumar isso aq pq eu coloquei 06:00 e ele validou
-            #posso fazer isso?
             break 
         except ValueError:
             print("Hora inválida. Tente novamente.")
-        #criar um while true separado pra data e hoario pq quando erra o horario tem que digitar a data dnv
+            
     eventos[id_evento] = {
         'nome' : nome,
         'data_evento' : data,
@@ -70,15 +72,11 @@ def exibir_eventos():
 
     print("Eventos cadastrados:")
     
-    for id, event in sorted(eventos.items(), key=lambda e: e[1]['data_evento']):
+    for id, evento in sorted(eventos.items(), key=lambda e: e[1]['data_evento']):
+        mostrar_evento(id, evento)
         #aqui, evento.items() é uma tupla (id, dados_do_evento) onde dados_do_evento é um dicionario
         #e pega a data do evento do indice 1 da tupla que é dicio de evento
-        
-        print(f"Data: {event['data_evento'].strftime('%d/%m/%Y')} - Hora: {event['hora_evento']}")
-        print(f"Código do evento: {id}")
-        print(f"Nome: {event['nome']}")
-        print(f"Tema: {event['tema']}")
-        print("")
+    
         #acho q n precisa de participante aq
 
 def listar_participantes_evento():
@@ -89,7 +87,6 @@ def listar_participantes_evento():
     print("")
     
     id_evento = ler_id("Digite o ID do evento: ")
-    
     evento = existencia(id_evento, eventos)
     if not evento:
         print("Evento não encontrado.")
@@ -100,9 +97,10 @@ def listar_participantes_evento():
     if inscritos:
         print(f"Participantes inscritos no evento {evento['nome']}: ")
         for id, p in inscritos.items():
-            print(f"(ID: {id}) - {p['nome']}: {p['email']}")
+            print(f"ID: {id} - {p['nome']}: {p['email']}")
     else:
         print("Esse evento não possui participantes.")
+        
 def deletar_evento():
     from participante import participantes
     print("Verifique se há participantes inscritos nesse evento antes de deletá-lo.")
@@ -115,8 +113,7 @@ def deletar_evento():
     if not evento:
         return
     
-    inscritos = verificar_participantes(evento, participantes)
-    if inscritos:
+    if verificar_participantes(evento, participantes):
         print("Delete os participantes do evento antes de excluí-lo.")
         return
     
@@ -128,16 +125,10 @@ def filtrar_evento():
     print("Deseja filtrar o evento por tema ou data? ")
 
     def exibir_filtrados(filtrado):
-        # if not filtrado:
-        #     print(f"Nenhum evento encontrado. ")
-        #     return
         limpar_tela()
         if filtrado:
             for id_evento, evento in filtrado:
-                print(f"ID: {id_evento} - {evento['nome']}")
-                print(f"{evento['data_evento'].strftime('%d/%m/%Y')} - {evento['hora_evento']}")
-                print(f"Tema: {evento['tema']}")
-                print("_" * 50)
+                exibir_eventos(id_evento, evento)
         else:
             print(f"Nenhum evento encontrado. ")
             
