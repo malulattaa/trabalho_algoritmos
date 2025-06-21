@@ -12,7 +12,7 @@ def cadastrar_evento():
     limpar_tela()
     #add carga horaria
 
-    nomes_existentes = set(e['nome'] for id, e in eventos.items())
+    nomes_existentes = set(e['nome'] for e in eventos.values())
     
     nome = input("Nome: ")
     
@@ -34,7 +34,7 @@ def cadastrar_evento():
             horario_inicio = time(7,0)
             horario_fim = time(18,0)
             
-            if horario_inicio <= horario <= horario_fim:
+            if horario_inicio >= horario >= horario_fim:
                 print("Horário não comercial. Escolha um horário entre as 07:00 às 18:00.")
                 continue
             #arrumar isso aq pq eu coloquei 06:00 e ele validou
@@ -42,7 +42,7 @@ def cadastrar_evento():
             break 
         except ValueError:
             print("Data/hora inválida. Tente novamente.")
-        
+        #criar um while true separado pra data e hoario pq quando erra o horario tem que digitar a data dnv
     eventos[id_evento] = {
         'nome' : nome,
         'data_evento' : data,
@@ -127,7 +127,7 @@ def filtrar_evento():
             print(f"Nenhum evento encontrado. ")
             return
         for evento in filtrado:
-            id_evento = [id for id, e in eventos.items() if e==evento[0]]
+            id_evento = [id for id in eventos.items() if id==eventos[0]]
             print(f"ID: {id_evento} - {evento['nome']}")
             print(f"{evento['data_evento'].strftime('%d/%m/%Y')} - {evento['hora_evento']}")
             print(f"Tema: {evento['tema']}")
@@ -141,4 +141,4 @@ def filtrar_evento():
         1: ("Tema", filtrar_tema),
         2: ("Data", filtrar_data),
     }
-    menu_geral(f'{"_" * 15, "FILTRAR EVENTO", 15 * "_"}', opcoes)
+    menu_geral("FILTRAR EVENTO", opcoes)

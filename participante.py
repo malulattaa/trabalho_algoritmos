@@ -34,6 +34,7 @@ def procurar_participante():
     participante = existencia(id_participante, participantes)
     if not participante: 
         return
+    limpar_tela()
     print(f"Participante {id_participante}:")
     print(f"Nome: {participante['nome']}")
     print(f"E-mail: {participante['email']}")
@@ -46,7 +47,7 @@ def procurar_participante():
         print("O participante não está inscrito em eventos.")
         
 def atualizar_email():
-    id_participante = ler_id("Digite o id do participante que deseja buscar: ")
+    id_participante = ler_id("Digite o id do participante que deseja alterar o e-mail: ")
     participante = existencia(id_participante, participantes)
     if not participante:
         return

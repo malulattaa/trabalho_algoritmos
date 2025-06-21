@@ -23,7 +23,7 @@ def limpar_tela():
 def menu_geral(titulo, opcoes):
     while True:
         #limpar_tela()
-        print(f'{titulo.upper():^40}')
+        print(f'{titulo.upper():_^50}')
         for num_opcao, (descricao, _) in opcoes.items():
             print(f"{num_opcao}: {descricao}")
         print("0 - Voltar")
