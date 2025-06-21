@@ -60,3 +60,11 @@ def tratar_data(mensagem= "Data do evento (dd/mm/aaaa): "):
             return data
         except ValueError:
                 print("Data/hora inválida. Tente novamente.")
+                
+def verificar_email(email, dicionario):
+    
+    emails_existentes = set(p['email'] for p in dicionario.values())
+    
+    if email in emails_existentes:
+        print("Esse e-mail já está sendo usado.")
+        return

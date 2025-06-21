@@ -1,4 +1,4 @@
-from util import limpar_tela, ler_id, existencia
+from util import limpar_tela, ler_id, existencia, verificar_email
 from temas import menu_temas
 from evento import eventos, exibir_eventos
 
@@ -11,11 +11,7 @@ def cadastrar_participante():
     #ver se digitar nome vazio
     email = input("e-mail: ")
     
-    emails_existentes = set(p['email'] for id, p in participantes.items())
-    
-    if email in emails_existentes:
-        print("Esse e-mail já está sendo usado.")
-        return
+    verificar_email(email, participantes)
     
     preferencia = []
     while input("Deseja adicionar uma preferência temática? (S para sim)/(N para não): ").upper().strip() == 'S':
@@ -59,6 +55,7 @@ def atualizar_email():
     print(f"E-mail atual: {participante['email']}")
     print("")
     email_novo = input(f"Digite o novo e-mail do participante {participante['nome']}: ")
+    verificar_email(email_novo, participantes)
     participante['email'] = email_novo
     print(f"O e-mail do participante {participante['nome']} foi alterado com sucesso para {email_novo}.")
 
