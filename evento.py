@@ -64,7 +64,7 @@ def exibir_eventos():
         #aqui, evento.items() é uma tupla (id, dados_do_evento) onde dados_do_evento é um dicionario
         #e pega a data do evento do indice 1 da tupla que é dicio de evento
         
-        print(f"Data: {event['data_evento']} - Hora: {event['hora_evento']}")
+        print(f"Data: {event['data_evento'].strftime('%d/%m/%Y')} - Hora: {event['hora_evento']}")
         print(f"Código do evento: {id}")
         print(f"Nome: {event['nome']}")
         print(f"Tema: {event['tema']}")
@@ -124,7 +124,7 @@ def filtrar_evento():
         for evento in filtrado:
             id_evento = [id for id, e in eventos.items() if e==evento[0]]
             print(f"ID: {id_evento} - {evento['nome']}")
-            print(f"{evento['data_evento']} - {evento['hora_evento']}")
+            print(f"{evento['data_evento'].strftime('%d/%m/%Y')} - {evento['hora_evento']}")
             print(f"Tema: {evento['tema']}")
     def filtrar_tema():
         tema = menu_temas()
