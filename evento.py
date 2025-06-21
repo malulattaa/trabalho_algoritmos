@@ -11,13 +11,14 @@ def cadastrar_evento():
     
     limpar_tela()
     #add carga horaria
-
-    nomes_existentes = set(e['nome'] for e in eventos.values())
-    
-    nome = input("Nome: ")
-    
-    if nome in nomes_existentes:
-        print("Esse evento já foi cadastrado. Digite outro nome.")
+    while True: 
+        nome = input("Nome: ")
+        nomes_existentes = set(e['nome'] for e in eventos.values())
+        
+        if nome in nomes_existentes:
+            print("Esse evento já foi cadastrado. Digite outro nome.")
+        else:
+            break
         
     while True:
         data = tratar_data()
@@ -36,7 +37,7 @@ def cadastrar_evento():
             horario_inicio = time(7,0)
             horario_fim = time(18,0)
             
-            if horario_inicio > horario or horario > horario_fim:
+            if horario < horario_inicio or horario > horario_fim:
                 print("Horário não comercial.")
                 limpar_tela()
                 continue
@@ -56,6 +57,7 @@ def cadastrar_evento():
     }
     print(f"Evento {eventos[id_evento]['nome']} cadastrado com sucesso!")
     id_evento += 1
+    limpar_tela()
 
 def exibir_eventos():
     limpar_tela()
@@ -130,19 +132,20 @@ def filtrar_evento():
             print(f"Nenhum evento encontrado. ")
             return
         
+        limpar_tela()
         for id_evento, evento in filtrado:
             print(f"ID: {id_evento} - {evento['nome']}")
             print(f"{evento['data_evento'].strftime('%d/%m/%Y')} - {evento['hora_evento']}")
             print(f"Tema: {evento['tema']}")
-            print("_" * 30)
+            print("_" * 50)
             
     def filtrar_tema():
         tema = menu_temas()
-        exibir_filtrados((id_evento, evento) for id_evento, evento in eventos.items if evento['tema'] == tema)
+        exibir_filtrados((id_evento, evento) for id_evento, evento in eventos.items() if evento['tema'] == tema)
         
     def filtrar_data():
         data = tratar_data()
-        exibir_filtrados((id_evento, evento) for id_evento, evento in eventos.items if evento['data_evento'] == data)
+        exibir_filtrados((id_evento, evento) for id_evento, evento in eventos.items() if evento['data_evento'] == data)
         
     opcoes = {
         1: ("Tema", filtrar_tema),
