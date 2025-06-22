@@ -31,6 +31,7 @@ def cadastrar_participante():
         'pref_tematica' : preferencia,
         'eventos' : []
     }
+    limpar_tela()
     print(f"Participante {nome} cadastrado com sucesso!")
     id_participante += 1
     
@@ -40,14 +41,17 @@ def procurar_participante():
     if not participante: 
         return
     limpar_tela()
-    print(f"Participante {id_participante}:")
-    print(f"Nome: {participante['nome']}")
+    print(f"{id_participante} - {participante['nome']}")
     print(f"E-mail: {participante['email']}")
+    print("")
     print(f"Preferências temáticas: ")
     print(",".join(participante['pref_tematica']) if participante['pref_tematica'] else "O participante não tem preferência temática")
-    print(f"Eventos: ")
+    print("")
+    print(f"Eventos que o participante está inscrito: ")
     if participante['eventos']:
-        print(",".join(eventos[id]['nome'] for id in participante['eventos'] if id in eventos))
+        for id_evento in participante['eventos']:
+            evento = eventos.get(id_evento)
+            print(f"ID: {id_evento} | Nome: {evento['nome']} | Data: {evento['data_evento']} | Horário: {evento['hora_evento']} | Tema: {evento['tema']}")
     else:
         print("O participante não está inscrito em eventos.")
         
@@ -96,3 +100,5 @@ def inscricao_evento():
     participante['eventos'].append(id_evento)
     evento['participantes'].append(id_participante)
     print(f"{participante['nome']} inscrito no evento {evento['nome']} com sucesso!")
+    
+#listar todos os eventos em que 1 participante esta inscrito

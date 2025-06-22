@@ -139,7 +139,7 @@ def filtrar_evento():
     def filtrar_data():
         data = tratar_data()
         exibir_filtrados(list(filter(lambda item: item[1]['data_evento'] == data, eventos.items())))
-        
+        #nao ta pegando
     opcoes = {
         1: ("Tema", filtrar_tema),
         2: ("Data", filtrar_data),
