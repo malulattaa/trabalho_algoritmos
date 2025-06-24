@@ -1,6 +1,6 @@
 from util import ler_opcao, limpar_tela, menu_geral, ler_id, existencia
 from participante import cadastrar_participante, procurar_participante, atualizar_email, deletar_participante, inscricao_evento
-from estatisticas import estatisticas
+from estatisticas import *
 from evento import cadastrar_evento, exibir_eventos, listar_participantes_evento, deletar_evento, filtrar_evento
 from temas import trocar_tema, menu_temas, agrupar_tema
 
@@ -9,7 +9,7 @@ def menu_principal():
     opcoes = {
         1: ("Gerenciar participantes", menu_participantes),
         2: ("Gerenciar eventos", menu_eventos),
-        3: ("Estatísticas e relatórios", estatisticas),
+        3: ("Estatísticas e relatórios", menu_estatisticas),
     }
     menu_geral("MENU", opcoes)
 
@@ -38,4 +38,13 @@ def menu_participantes():
     }
     menu_geral("PARTICIPANTE", opcoes)
 
-
+def menu_estatisticas():
+    limpar_tela()
+    opcoes = {
+        1: ("Participantes mais ativos", participantes_ativos),
+       # 2: ("Taxa média de participação por tema", media_participacao),
+       # 3: ("Eventos com poucos participantes", pouco_participante),
+        4: ("Temas frequentes", temas_preferidos),
+        
+    }
+    menu_geral("ESTATÍSTICAS E RELATÓRIOS", opcoes)
