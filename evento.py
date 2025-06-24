@@ -86,8 +86,9 @@ def listar_participantes_evento():
     inscritos = verificar_participantes(evento, participantes)
     if inscritos:
         print(f"Participantes inscritos no evento {evento['nome']}: ")
-        for id, p in inscritos.items():
-            print(f"ID: {id} - {p['nome']}: {p['email']}")
+        dados = map(lambda item: f"ID: {item[0]} - {item[1]['nome']}: {item[1]['email']}", inscritos.items())
+        for p in dados:
+            print(p)
     else:
         print("Esse evento não possui participantes.")
         

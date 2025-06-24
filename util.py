@@ -5,7 +5,6 @@ def ler_opcao(lim_sup):
     """ 
     le a opcao do usuario, para que seja um numero dentro do intervalo valid
     """
-    #le a opcao do usuario e só aceita um numero int dentro do intervalo estipulado como valido
     while True:
         try:
             op = int(input("Escolha a opção: "))

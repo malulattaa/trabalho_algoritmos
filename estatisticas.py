@@ -35,12 +35,12 @@ def media_participantes_por_tema():
         print("Não há evento cadastrado.")
         return
     
+    media_tema = {}
     for evento in eventos.values():
         tema = evento['tema']
         num_participantes = len(evento['participantes'])
         
         
-        media_tema = {}
         if tema not in media_tema:
             media_tema[tema] = {
                 'eventos' : 0,

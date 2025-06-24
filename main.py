@@ -1,5 +1,5 @@
-import menu 
+from menu import menu_principal
 
-
-while True:
-    menu.menu_principal()
+menu_principal()
+print("Encerrando o programa.")
+    

@@ -23,7 +23,6 @@ def menu_eventos():
         5: ("Trocar tema de um evento", trocar_tema),
         6: ("Filtrar evento por tema/data", filtrar_evento),
         7: ("Agrupar por tema", agrupar_tema),
-        #contabilizar quantos eventos tem aquel tema
     }
     menu_geral("EVENTO", opcoes)
     

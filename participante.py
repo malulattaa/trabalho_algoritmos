@@ -11,7 +11,6 @@ def cadastrar_participante():
     limpar_tela()
     
     nome = input("Nome completo: ")
-    #ver se digitar nome vazio
     email = input("e-mail: ")
     verificar_email(email, participantes)
     
