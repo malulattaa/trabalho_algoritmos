@@ -1,14 +1,10 @@
 from datetime import datetime, date, time
 from util import limpar_tela, tratar_data, ler_id, existencia, verificar_participantes, menu_geral
 from temas import menu_temas
-
-id_evento = 1
-eventos = {}
+from dados import participantes, eventos, id_evento
 
 def mostrar_evento(id, evento):
-    """ 
-    exibe as informações de um evento específico
-    """
+    """ exibe as informações de um evento específico """
     print(f"Data: {evento['data_evento'].strftime('%d/%m/%Y')} - Hora: {evento['hora_evento']}")
     print(f"Código do evento: {id}")
     print(f"Nome: {evento['nome']}")
@@ -16,14 +12,9 @@ def mostrar_evento(id, evento):
     print("")
         
 def cadastrar_evento():
-    """ 
-    cadastro de um novo evento com nome, data, horário e tema
-    """
-    
+    """ cadastro de um novo evento com nome, data, horário e tema """
     global id_evento
-    
     limpar_tela()
-    #add carga horaria
     nomes_existentes = set(e['nome'] for e in eventos.values())
     while True: 
         nome = input("Nome: ")
@@ -41,11 +32,9 @@ def cadastrar_evento():
         
     while True:
         print("Digite o horário que o evento irá ocorrer (07:00 - 18:00)")
-        hora = input("Digite o horário do evento (h:min): ")
-        
+        hora = input("Digite o horário do evento (h:min): ")    
         try:
             horario = datetime.strptime(hora, "%H:%M").time()
-            
             if horario < time(7,0) or horario > time(18, 0):
                 print("Horário não comercial.")
                 limpar_tela()
@@ -64,13 +53,10 @@ def cadastrar_evento():
     }
     print(f"Evento {eventos[id_evento]['nome']} cadastrado com sucesso!")
     id_evento += 1
-    
     limpar_tela()
 
 def exibir_eventos():
-    """ 
-    exibe os eventos cadastrados, ordenando-os por data crescente
-    """
+    """ exibe os eventos cadastrados, ordenando-os por data crescente """
     limpar_tela()
     
     #ta mostrando nenhum evento cadastrado e ainda sim mandando digitar o id
@@ -79,8 +65,7 @@ def exibir_eventos():
         print("Nenhum evento cadastrado.")
         return
 
-    print("Eventos cadastrados:")
-    
+    print("Eventos cadastrados:")    
     for id, evento in sorted(eventos.items(), key=lambda e: e[1]['data_evento']):
         mostrar_evento(id, evento)
         #aqui, evento.items() é uma tupla (id, dados_do_evento) onde dados_do_evento é um dicionario
@@ -89,23 +74,16 @@ def exibir_eventos():
         #acho q n precisa de participante aq
 
 def listar_participantes_evento():
-    """ 
-    lista os participantes inscritos em um evento específico
-    """
-    from participante import participantes
-    
+    """lista os participantes inscritos em um evento específico"""
     limpar_tela()
     exibir_eventos()
     print("")
-    
     id_evento = ler_id("Digite o ID do evento: ")
     evento = existencia(id_evento, eventos)
     if not evento:
         print("Evento não encontrado.")
         return
-    
     inscritos = verificar_participantes(evento, participantes)
-    
     if inscritos:
         print(f"Participantes inscritos no evento {evento['nome']}: ")
         for id, p in inscritos.items():
@@ -114,32 +92,23 @@ def listar_participantes_evento():
         print("Esse evento não possui participantes.")
         
 def deletar_evento():
-    """ 
-    remove o evento se não tiver nenhum particpante inscrito
-    """
-    from participante import participantes
+    """ remove o evento se não tiver nenhum particpante inscrito"""
     print("Verifique se há participantes inscritos nesse evento antes de deletá-lo.")
     print("")
     exibir_eventos()
     print("")
-    
     id_evento = ler_id("Digite o ID do evento: ")
     evento = existencia(id_evento, eventos)
     if not evento:
         return
-    
     if verificar_participantes(evento, participantes):
         print("Delete os participantes do evento antes de excluí-lo.")
         return
-    
     del eventos[id_evento]
     print(f"Evento {evento['nome']} removido com sucesso.")
     
 def filtrar_evento():
-    """ 
-    filtra eventos por data ou tema
-    """
-    from temas import menu_temas
+    """ filtra eventos por data ou tema """
     print("Deseja filtrar o evento por tema ou data? ")
 
     def exibir_filtrados(filtrado):

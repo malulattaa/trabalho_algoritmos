@@ -43,7 +43,8 @@ def menu_geral(titulo, opcoes):
         _, funcao = opcoes[op]
         funcao()
 def verificar_participantes(evento, participantes):
-    return {id: p for id, p in participantes.items() if id in evento['participantes']}
+    """ dicio com os participantes cadastrados em um evento"""
+    return dict(filter(lambda item: item[0] in evento['participantes'], participantes.items()))
 #aqui dava pra usar filter mas tava retornando uma lista de tuplas, por isso mudei pra dicio, pra ficar melhor pra tratar
 
 def ler_id(mensagem="Digite o ID: "):

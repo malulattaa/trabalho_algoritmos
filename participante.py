@@ -1,9 +1,8 @@
 from util import limpar_tela, ler_id, existencia, verificar_email
 from temas import menu_temas
-from evento import eventos, exibir_eventos
+from evento import exibir_eventos
+from dados import participantes, id_participante, eventos
 
-participantes = {}
-id_participante = 1
 def cadastrar_participante():
     """ 
     cadastra novo participante com nome, e-mail e pref temática
