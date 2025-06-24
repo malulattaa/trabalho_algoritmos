@@ -6,6 +6,9 @@ id_evento = 1
 eventos = {}
 
 def mostrar_evento(id, evento):
+    """ 
+    exibe as informações de um evento específico
+    """
     print(f"Data: {evento['data_evento'].strftime('%d/%m/%Y')} - Hora: {evento['hora_evento']}")
     print(f"Código do evento: {id}")
     print(f"Nome: {evento['nome']}")
@@ -13,6 +16,9 @@ def mostrar_evento(id, evento):
     print("")
         
 def cadastrar_evento():
+    """ 
+    cadastro de um novo evento com nome, data, horário e tema
+    """
     
     global id_evento
     
@@ -62,6 +68,9 @@ def cadastrar_evento():
     limpar_tela()
 
 def exibir_eventos():
+    """ 
+    exibe os eventos cadastrados, ordenando-os por data crescente
+    """
     limpar_tela()
     
     #ta mostrando nenhum evento cadastrado e ainda sim mandando digitar o id
@@ -80,6 +89,9 @@ def exibir_eventos():
         #acho q n precisa de participante aq
 
 def listar_participantes_evento():
+    """ 
+    lista os participantes inscritos em um evento específico
+    """
     from participante import participantes
     
     limpar_tela()
@@ -102,6 +114,9 @@ def listar_participantes_evento():
         print("Esse evento não possui participantes.")
         
 def deletar_evento():
+    """ 
+    remove o evento se não tiver nenhum particpante inscrito
+    """
     from participante import participantes
     print("Verifique se há participantes inscritos nesse evento antes de deletá-lo.")
     print("")
@@ -121,6 +136,9 @@ def deletar_evento():
     print(f"Evento {evento['nome']} removido com sucesso.")
     
 def filtrar_evento():
+    """ 
+    filtra eventos por data ou tema
+    """
     from temas import menu_temas
     print("Deseja filtrar o evento por tema ou data? ")
 

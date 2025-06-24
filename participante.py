@@ -5,6 +5,9 @@ from evento import eventos, exibir_eventos
 participantes = {}
 id_participante = 1
 def cadastrar_participante():
+    """ 
+    cadastra novo participante com nome, e-mail e pref temática
+    """
     global id_participante
     limpar_tela()
     
@@ -36,6 +39,9 @@ def cadastrar_participante():
     id_participante += 1
     
 def procurar_participante():
+    """ 
+    busca um participante por id, mostrando suas informações e os eventos em que está inscrito
+    """
     id_participante = ler_id("Digite o id do participante que deseja buscar: ")
     participante = existencia(id_participante, participantes)
     if not participante: 
@@ -56,6 +62,9 @@ def procurar_participante():
         print("O participante não está inscrito em eventos.")
         
 def atualizar_email():
+    """
+    atualiza o e-mail de um participante ja cadastrado
+    """
     id_participante = ler_id("Digite o id do participante que deseja alterar o e-mail: ")
     participante = existencia(id_participante, participantes)
     if not participante:
@@ -70,6 +79,9 @@ def atualizar_email():
     print(f"O e-mail do participante {participante['nome']} foi alterado com sucesso para {email_novo}.")
 
 def deletar_participante():
+    """ 
+    remove um participante pelo id
+    """
     id_participante = ler_id("Digite o id do participante que deseja deletar: ")
     participante = existencia(id_participante, participantes)
     if not participante:
@@ -78,6 +90,9 @@ def deletar_participante():
     print(f"Participante {participante['nome']} removido com sucesso.")
     
 def inscricao_evento():
+    """
+    inscrição de participante em um evento com verificação se ele ja esta inscrito
+    """
     #se nenhum evento tiver cadastrado ja para
     if not eventos:
         print("Não há eventos disponíveis para realizar inscrição.")

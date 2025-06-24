@@ -4,7 +4,9 @@ from util import ler_id, existencia, limpar_tela, ler_opcao
 
 temas = ["Inteligência Artificial", "Web", "Segurança", "Rede", "Programação", "Banco de dados", "Mobile", "Computação em Nuvem", "Robótica"]
 def menu_temas():
-
+    """ 
+    menu de temas disponíveis retornando o tema escolhido
+    """
     #solução temporaria
     #limpar
     print("_" * 15, "TEMAS", "_" * 15)
@@ -25,6 +27,9 @@ def menu_temas():
     return temas[op - 1]
 
 def trocar_tema():
+    """ 
+    troca de tema de um evento especifico
+    """
     from evento import eventos, exibir_eventos
     from temas import menu_temas 
     #em caso de trocar o tema pelo tema que ja etsa, escrever algo
@@ -42,6 +47,9 @@ def trocar_tema():
         print(f"O tema do evento {evento['nome']} foi alterado para {tema_novo}.")
 
 def agrupar_tema():
+    """ 
+    exibe a quantidade de eventos por tema
+    """
     from evento import eventos
     agrupar = {
         tema: {id: evento for id, evento in eventos.items() if evento['tema'] == tema} for tema in temas

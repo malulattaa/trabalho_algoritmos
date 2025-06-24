@@ -2,6 +2,9 @@ import os
 from datetime import datetime
 
 def ler_opcao(lim_sup):
+    """ 
+    le a opcao do usuario, para que seja um numero dentro do intervalo valid
+    """
     #le a opcao do usuario e só aceita um numero int dentro do intervalo estipulado como valido
     while True:
         try:
@@ -15,12 +18,18 @@ def ler_opcao(lim_sup):
 
 
 def limpar_tela():
+    """ 
+    limpa a tela do terminal
+    """
     os.system("cls" if os.name == 'nt' else 'clear')
     #os.system() - Permite executar comandos do sistema operacional a partir do Python.
     #os.name - Retorna o nome do sistema operacional, nesse caso, windows é nt
     #Executa o comando cls (limpar tela no Windows)
     
 def menu_geral(titulo, opcoes):
+    """ 
+    exibe um menu baseado em um dicionario de opções
+    """
     while True:
         #limpar_tela()
         print(f'{titulo.upper():_^50}')
@@ -38,6 +47,9 @@ def verificar_participantes(evento, participantes):
 #aqui dava pra usar filter mas tava retornando uma lista de tuplas, por isso mudei pra dicio, pra ficar melhor pra tratar
 
 def ler_id(mensagem="Digite o ID: "):
+    """ 
+    solicita um id ao usuário e retorna se for valido
+    """
     while True:
         try:
             return int(input(mensagem))
@@ -45,6 +57,9 @@ def ler_id(mensagem="Digite o ID: "):
             print("ID inválido.")
 
 def existencia(id, dicionario):
+    """ 
+    verifica se o id informado existe no dicionario, se sim retorna o item correspondente
+    """
     item = dicionario.get(id)
     if item:
         return item
@@ -52,6 +67,9 @@ def existencia(id, dicionario):
     return None
 
 def tratar_data(mensagem= "Data do evento (dd/mm/aaaa): "):
+    """ 
+    solicita uma data ao usuário e valida
+    """
     while True: 
         try:
             data_recebida = input(mensagem)
@@ -62,6 +80,9 @@ def tratar_data(mensagem= "Data do evento (dd/mm/aaaa): "):
                 print("Data inválida. Tente novamente.")
                 
 def verificar_email(email, dicionario):
+    """ 
+    verifica se o email ja esta sendo usado
+    """
     
     emails_existentes = set(p['email'] for p in dicionario.values())
     

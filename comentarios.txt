@@ -5,3 +5,4 @@ verificar participantes duplicados
 calcular a taxa média de participação por tema
 identificar eventos com menos de dois participantes (para possível cancelamento)
 detectar e remover automaticamente registros duplicados de participantes no mesmo evento.
+adicionar docstrings
