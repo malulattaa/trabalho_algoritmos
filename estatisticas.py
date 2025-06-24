@@ -19,6 +19,7 @@ def temas_preferidos():
         print(f" - {pref}")
 
 def poucos_participantes():
+    """mostra eventos com menos de 2 participantes para possível cancelamento"""
     qtde_participantes = [e['nome'] for e in eventos.values() if len(e['participantes']) < 2]
     if qtde_participantes:
         print("Eventos com menos de 2 participantes: ")
@@ -30,18 +31,24 @@ def poucos_participantes():
 def media_participantes_por_tema():
     """ cálculo da média de participantes que um tema tem"""
     
-    for evento in evento.values():
+    if not eventos:
+        print("Não há evento cadastrado.")
+        return
+    
+    for evento in eventos.values():
         tema = evento['tema']
         num_participantes = len(evento['participantes'])
         
+        
         media_tema = {}
-        media_tema[tema] = {
-            'eventos' : 0,
-            "participantes" : 0
-        } 
+        if tema not in media_tema:
+            media_tema[tema] = {
+                'eventos' : 0,
+                "participantes" : 0
+            } 
         
         media_tema[tema]['eventos'] += 1
-        tema_dados[tema]['participantes'] += num_participantes
+        media_tema[tema]['participantes'] += num_participantes
         
     print("Taxa média de participantes por tema: ")
     for tema, dados in media_tema.items():
