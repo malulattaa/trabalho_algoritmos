@@ -43,7 +43,7 @@ def menu_estatisticas():
     opcoes = {
         1: ("Participantes mais ativos", participantes_ativos),
        # 2: ("Taxa média de participação por tema", media_participacao),
-       # 3: ("Eventos com poucos participantes", pouco_participante),
+        3: ("Eventos com poucos participantes", poucos_participantes),
         4: ("Temas frequentes", temas_preferidos),
         
     }

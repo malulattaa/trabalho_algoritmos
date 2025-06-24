@@ -1,4 +1,4 @@
-from dados import participantes
+from dados import *
 
 def participantes_ativos():
     """ lista os participantes que estão inscritos em vários eventos"""
@@ -12,12 +12,18 @@ def participantes_ativos():
         print("Não há participante inscrito em mais de um evento.")
 def temas_preferidos():
     """ mostra os temas preferidos dos participantes"""
-    
-    
     temas = set(tema for p in participantes.values() for tema in p['pref_tematica'])
     
     print("Temas preferidos dos participantes: ")
     for pref in temas:
         print(f" - {pref}")
-        
+
+def poucos_participantes():
+    qtde_participantes = [e['nome'] for e in eventos.values() if len(e['participantes']) < 2]
+    if qtde_participantes:
+        print("Eventos com menos de 2 participantes: ")
+        for nome in qtde_participantes:
+            print(f" - {nome}")
+    else:
+        print("Não há eventos com menos de 2 (dois) participantes.")
         
