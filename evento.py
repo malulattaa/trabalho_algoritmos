@@ -2,7 +2,6 @@ from datetime import datetime, date, time
 from util import limpar_tela, tratar_data, ler_id, existencia, verificar_participantes, menu_geral
 from temas import menu_temas
 
-
 id_evento = 1
 eventos = {}
 
@@ -59,6 +58,7 @@ def cadastrar_evento():
     }
     print(f"Evento {eventos[id_evento]['nome']} cadastrado com sucesso!")
     id_evento += 1
+    
     limpar_tela()
 
 def exibir_eventos():
@@ -128,9 +128,9 @@ def filtrar_evento():
         limpar_tela()
         if filtrado:
             for id_evento, evento in filtrado:
-                exibir_eventos(id_evento, evento)
+                mostrar_evento(id_evento, evento)
         else:
-            print(f"Nenhum evento encontrado. ")
+            print("Nenhum evento encontrado. ")
             
     def filtrar_tema():
         tema = menu_temas()
