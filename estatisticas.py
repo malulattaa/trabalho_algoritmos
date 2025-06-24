@@ -27,3 +27,23 @@ def poucos_participantes():
     else:
         print("Não há eventos com menos de 2 (dois) participantes.")
         
+def media_participantes_por_tema():
+    """ cálculo da média de participantes que um tema tem"""
+    
+    for evento in evento.values():
+        tema = evento['tema']
+        num_participantes = len(evento['participantes'])
+        
+        media_tema = {}
+        media_tema[tema] = {
+            'eventos' : 0,
+            "participantes" : 0
+        } 
+        
+        media_tema[tema]['eventos'] += 1
+        tema_dados[tema]['participantes'] += num_participantes
+        
+    print("Taxa média de participantes por tema: ")
+    for tema, dados in media_tema.items():
+        media = dados['participantes'] / dados['eventos']
+        print(f"{tema} - {media} participantes por evento.")
