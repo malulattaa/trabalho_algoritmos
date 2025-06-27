@@ -1,7 +1,10 @@
 from util import limpar_tela, ler_id, existencia, verificar_email
 from temas import menu_temas
-from evento import exibir_eventos
 from dados import participantes, id_participante, eventos
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from evento import exibir_eventos
 
 def cadastrar_participante():
     """ 
@@ -44,6 +47,7 @@ def procurar_participante():
     """ 
     busca um participante por id, mostrando suas informações e os eventos em que está inscrito
     """
+    limpar_tela()
     id_participante = ler_id("Digite o id do participante que deseja buscar: ")
     participante = existencia(id_participante, participantes)
     if not participante: 
@@ -67,6 +71,7 @@ def atualizar_email():
     """
     atualiza o e-mail de um participante ja cadastrado
     """
+    limpar_tela()
     id_participante = ler_id("Digite o id do participante que deseja alterar o e-mail: ")
     participante = existencia(id_participante, participantes)
     if not participante:
@@ -84,6 +89,7 @@ def deletar_participante():
     """ 
     remove um participante pelo id
     """
+    limpar_tela()
     id_participante = ler_id("Digite o id do participante que deseja deletar: ")
     participante = existencia(id_participante, participantes)
     if not participante:
@@ -95,6 +101,8 @@ def inscricao_evento():
     """
     inscrição de participante em um evento com verificação se ele ja esta inscrito
     """
+    from evento import exibir_eventos
+    limpar_tela()
     #se nenhum evento tiver cadastrado ja para
     if not eventos:
         print("Não há eventos disponíveis para realizar inscrição.")
@@ -110,11 +118,14 @@ def inscricao_evento():
     if not participante:
         return
     
+    # Verifica se o participante já está inscrito no evento.
     if id_evento in participante['eventos']:
         print("O participante já está inscrito nesse evento!")
         return
     
+    # o evento é adicionado à lista de eventos do participante
     participante['eventos'].append(id_evento)
+    # o participante é adicionado à lista de participantes do evento
     evento['participantes'].append(id_participante)
     print(f"{participante['nome']} inscrito no evento {evento['nome']} com sucesso!")
     

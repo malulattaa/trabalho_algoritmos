@@ -2,9 +2,8 @@ falta:
 
 dar opção do usuario alterar ql dado do evento
 adicionar args e kwargs
-
-
--questao de ja ter alguns participantes inscritos
--linhas do cod
--forma de apresentação
-- se tem problema as imporações dentro das funções
+- arrumar onde limpa tela
+- add dicionario
+- questão de relatório
+- ver a questão de mostrar todos os temas na hora da média do participante, pq por ser o gestor
+que vai usar essa parte, talvez seja necessário mostrar todos

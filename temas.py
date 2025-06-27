@@ -1,6 +1,11 @@
 from collections import Counter
 from util import ler_id, existencia, limpar_tela, ler_opcao
 from dados import eventos
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from evento import exibir_eventos
+
 
 temas = ["Inteligência Artificial", "Web", "Segurança", "Rede", "Programação", "Banco de dados", "Mobile", "Computação em Nuvem", "Robótica"]
 def menu_temas():
@@ -49,6 +54,7 @@ def agrupar_tema():
     """ 
     exibe a quantidade de eventos por tema
     """
+    limpar_tela()
     agrupar = {
         tema: {id: evento for id, evento in eventos.items() if evento['tema'] == tema} for tema in temas
     }

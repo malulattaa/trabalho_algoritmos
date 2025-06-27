@@ -51,9 +51,9 @@ def cadastrar_evento():
         'participantes' : []
         
     }
+    limpar_tela()
     print(f"Evento {eventos[id_evento]['nome']} cadastrado com sucesso!")
     id_evento += 1
-    limpar_tela()
 
 def exibir_eventos():
     """ exibe os eventos cadastrados, ordenando-os por data crescente """
@@ -95,6 +95,7 @@ def listar_participantes_evento():
 def deletar_evento():
     """ remove o evento se não tiver nenhum particpante inscrito"""
     print("Verifique se há participantes inscritos nesse evento antes de deletá-lo.")
+    limpar_tela()
     print("")
     exibir_eventos()
     print("")
@@ -110,6 +111,7 @@ def deletar_evento():
     
 def filtrar_evento():
     """ filtra eventos por data ou tema """
+    limpar_tela()
     print("Deseja filtrar o evento por tema ou data? ")
 
     def exibir_filtrados(filtrado):
@@ -126,7 +128,7 @@ def filtrar_evento():
         
     def filtrar_data():
         data = tratar_data()
-        exibir_filtrados(list(filter(lambda item: item[1]['data_evento'] == data, eventos.items())))
+        exibir_filtrados(list(filter(lambda item: item[1]['data_evento'].strftime('%d/%m/%Y') == data, eventos.items())))
         #nao ta pegando
     opcoes = {
         1: ("Tema", filtrar_tema),
