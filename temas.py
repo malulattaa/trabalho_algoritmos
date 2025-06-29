@@ -31,25 +31,6 @@ def menu_temas():
     #     return None
     return temas[op - 1]
 
-def trocar_tema():
-    """ 
-    troca de tema de um evento especifico
-    """
-    from evento import exibir_eventos
-    #em caso de trocar o tema pelo tema que ja etsa, escrever algo
-    limpar_tela()
-    exibir_eventos()
-    id_evento = ler_id("Digite o id do evento que deseja trocar o tema: ")
-    #escrever se nao for o certo
-    evento = existencia(id_evento, eventos)
-    if evento:
-        print(f"{evento['nome']}")
-        print(f"{evento['tema']}")
-        print(f"Deseja trocar o tema do evento {evento['nome']} por qual tema? ")
-        tema_novo = menu_temas()
-        evento['tema'] = tema_novo
-        print(f"O tema do evento {evento['nome']} foi alterado para {tema_novo}.")
-
 def agrupar_tema():
     """ 
     exibe a quantidade de eventos por tema

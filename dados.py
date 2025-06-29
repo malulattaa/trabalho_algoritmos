@@ -22,7 +22,7 @@ participantes = {
     },
 }
 
-id_participante = 4  # Próximo ID disponível
+id_participante = 4  
 
 # Eventos
 eventos = {
@@ -49,4 +49,4 @@ eventos = {
     },
 }
 
-id_evento = 4  # Próximo ID disponível
+id_evento = 4  

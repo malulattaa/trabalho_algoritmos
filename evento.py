@@ -135,3 +135,22 @@ def filtrar_evento():
         2: ("Data", filtrar_data),
     }
     menu_geral("FILTRAR EVENTO", opcoes)
+    
+def alterar_evento():
+    exibir_eventos()
+    id_evento = ler_id("ID do evento a ser editado: ")
+    evento = existencia(id_evento, eventos)
+    if not evento:
+        return
+    
+    print("O que deseja alterar? ")
+    opcoes = {
+        1: ('Nome', lambda: evento.update({'nome': input('Novo nome: ')})),
+        2: ('Data', lambda: evento.update({'data_evento': tratar_data()})),
+        3: ('Hora', lambda: evento.update({'hora_evento': datetime.strptime(input("Nova hora (h:min): "), "%H:%M").time()})),
+        4: ('Tema', lambda: evento.update({'tema': menu_temas()})),
+    }
+    # a lambda aq é pra ação só ser executada quando a opção for escolhida
+    # sem ela a ação foi executada na hora que esse menu é chamado
+    
+    menu_geral("EDITAR EVENTO", opcoes)

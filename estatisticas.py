@@ -1,4 +1,5 @@
 from dados import *
+from temas import temas
 
 def participantes_ativos():
     """ lista os participantes que estão inscritos em vários eventos"""
@@ -31,26 +32,13 @@ def poucos_participantes():
 def media_participantes_por_tema():
     """ cálculo da média de participantes que um tema tem"""
     
-    if not eventos:
-        print("Não há evento cadastrado.")
-        return
-    
-    media_tema = {}
-    for evento in eventos.values():
-        tema = evento['tema']
-        num_participantes = len(evento['participantes'])
+    for tema in temas:
+        evento_tema = [e for e in eventos.values() if e['tema'] == tema]
+        if evento_tema:
+            participantes_tema = sum(len(e['participantes']) for e in evento_tema)
+            media = participantes_tema/ len(evento_tema)
+        else:
+            media = 0
         
-        
-        if tema not in media_tema:
-            media_tema[tema] = {
-                'eventos' : 0,
-                "participantes" : 0
-            } 
-        
-        media_tema[tema]['eventos'] += 1
-        media_tema[tema]['participantes'] += num_participantes
-        
-    print("Taxa média de participantes por tema: ")
-    for tema, dados in media_tema.items():
-        media = dados['participantes'] / dados['eventos']
-        print(f"{tema} - {media} participantes por evento.")
+        print(f"O tema {tema} tem a média de {media} participantes por tema")
+        print("")

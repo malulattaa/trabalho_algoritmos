@@ -1,8 +1,8 @@
 from util import ler_opcao, limpar_tela, menu_geral, ler_id, existencia
 from participante import cadastrar_participante, procurar_participante, atualizar_email, deletar_participante, inscricao_evento
 from estatisticas import *
-from evento import cadastrar_evento, exibir_eventos, listar_participantes_evento, deletar_evento, filtrar_evento
-from temas import trocar_tema, menu_temas, agrupar_tema
+from evento import cadastrar_evento, alterar_evento, exibir_eventos, listar_participantes_evento, deletar_evento, filtrar_evento
+from temas import agrupar_tema
 
 def menu_principal():
     limpar_tela()
@@ -20,7 +20,7 @@ def menu_eventos():
         2: ("Exibir lista de eventos", exibir_eventos),
         3: ("Listar participantes por evento", listar_participantes_evento),
         4: ("Remover evento", deletar_evento),
-        5: ("Trocar tema de um evento", trocar_tema),
+        5: ("Editar dados do evento", alterar_evento),
         6: ("Filtrar evento por tema/data", filtrar_evento),
         7: ("Agrupar por tema", agrupar_tema),
     }
