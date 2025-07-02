@@ -1,5 +1,5 @@
 from datetime import datetime, date, time
-from util import limpar_tela, tratar_data, ler_id, existencia, verificar_participantes, menu_geral
+from util import limpar_tela, tratar_data, ler_id, existencia, verificar_participantes, menu_geral, titulos
 from temas import menu_temas
 from dados import participantes, eventos, id_evento
 
@@ -15,6 +15,7 @@ def cadastrar_evento():
     """ cadastro de um novo evento com nome, data, horário e tema """
     global id_evento
     limpar_tela()
+    titulos("CADASTRO DE EVENTO")
     nomes_existentes = set(e['nome'] for e in eventos.values())
     while True: 
         nome = input("Nome: ")
@@ -57,15 +58,14 @@ def cadastrar_evento():
 
 def exibir_eventos():
     """ exibe os eventos cadastrados, ordenando-os por data crescente """
-    limpar_tela()
     
+    print("LISTA DE EVENTOS CADASTRADOS".center(60, "-"))
     #ta mostrando nenhum evento cadastrado e ainda sim mandando digitar o id
     # porque algumas outras funções chamam o exibir_eventos() antes de pedir ID, mas essa função em si só exibe.
     if len(eventos) == 0:
         print("Nenhum evento cadastrado.")
         return
 
-    print("Eventos cadastrados:")    
     for id, evento in sorted(eventos.items(), key=lambda e: e[1]['data_evento']):
         mostrar_evento(id, evento)
         #aqui, evento.items() é uma tupla (id, dados_do_evento) onde dados_do_evento é um dicionario
@@ -76,8 +76,9 @@ def exibir_eventos():
 def listar_participantes_evento():
     """lista os participantes inscritos em um evento específico"""
     limpar_tela()
-    exibir_eventos()
+    titulos("PARTICIPANTES DO EVENTO")
     print("")
+    exibir_eventos()
     id_evento = ler_id("Digite o ID do evento: ")
     evento = existencia(id_evento, eventos)
     if not evento:
@@ -97,6 +98,8 @@ def deletar_evento():
     print("Verifique se há participantes inscritos nesse evento antes de deletá-lo.")
     limpar_tela()
     print("")
+    titulos("REMOÇÃO DE EVENTO")
+    print("")
     exibir_eventos()
     print("")
     id_evento = ler_id("Digite o ID do evento: ")
@@ -112,7 +115,6 @@ def deletar_evento():
 def filtrar_evento():
     """ filtra eventos por data ou tema """
     limpar_tela()
-    print("Deseja filtrar o evento por tema ou data? ")
 
     def exibir_filtrados(filtrado):
         limpar_tela()
@@ -123,10 +125,12 @@ def filtrar_evento():
             print("Nenhum evento encontrado. ")
             
     def filtrar_tema():
+        titulos("FILTRO DE EVENTOS POR TEMA")
         tema = menu_temas()
         exibir_filtrados(list(filter(lambda item: item[1]['tema'] == tema, eventos.items())))
         
     def filtrar_data():
+        titulos("FILTRO DE EVENTOS POR DATA")
         data = tratar_data()
         exibir_filtrados(list(filter(lambda item: item[1]['data_evento'] == data, eventos.items())))
         #nao ta pegando
@@ -137,13 +141,16 @@ def filtrar_evento():
     menu_geral("FILTRAR EVENTO", opcoes)
     
 def alterar_evento():
+    limpar_tela()
+    titulos("ALTERAR DADOS DO EVENTO")
+    print("")
     exibir_eventos()
     id_evento = ler_id("ID do evento a ser editado: ")
     evento = existencia(id_evento, eventos)
     if not evento:
         return
     
-    print("O que deseja alterar? ")
+    limpar_tela()
     opcoes = {
         1: ('Nome', lambda: evento.update({'nome': input('Novo nome: ')})),
         2: ('Data', lambda: evento.update({'data_evento': tratar_data()})),

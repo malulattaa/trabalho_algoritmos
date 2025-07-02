@@ -1,5 +1,5 @@
 from collections import Counter
-from util import ler_id, existencia, limpar_tela, ler_opcao
+from util import ler_id, existencia, limpar_tela, ler_opcao, titulos
 from dados import eventos
 from typing import TYPE_CHECKING
 
@@ -12,6 +12,9 @@ def menu_temas():
     """ 
     menu de temas disponíveis retornando o tema escolhido
     """
+    print("")
+    print("PREFERÊNCIA TEMÁTICA".center(60, "-"))
+    print("")
     #limpar
     print("1 - Inteligência Artificial - IA")
     print("2 - Web")
@@ -33,12 +36,13 @@ def agrupar_tema():
     exibe a quantidade de eventos por tema
     """
     limpar_tela()
+    titulos("EVENTOS AGRUPADOS POR TEMA")
     agrupar = {
         tema: {id: evento for id, evento in eventos.items() if evento['tema'] == tema} for tema in temas
     }
     for tema, lista_evento in agrupar.items():
-        print(f"{tema} - {len(lista_evento)} eventos")
+        print(f">> {tema} - {len(lista_evento)} eventos")
         for id, evento in lista_evento.items():
-            print(f" - {id} - {evento['nome']}")
-            print("")
+            print(f"   - {id} | {evento['nome']}")
+        print("-"*60)
             #precisa de mais alguma coisa alem de id e nome?

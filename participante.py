@@ -23,7 +23,6 @@ def cadastrar_participante():
     while True:
         resposta = input("Deseja adicionar preferência temática? (S/N)").upper()
         if resposta == 'S':
-            print("\n" + "PREFERÊNCIA TEMÁTICA".center(60, "-"))
             print("")
             #da pra chamar um menu geral?
             tema = menu_temas() 
@@ -53,6 +52,7 @@ def procurar_participante():
     """
     limpar_tela()
     titulos("CONSULTA DE PARTICIPANTE POR ID")
+    listar_participantes()
     id_participante = ler_id("Digite o id do participante que deseja buscar: ")
     participante = existencia(id_participante, participantes)
     if not participante: 
@@ -78,6 +78,7 @@ def atualizar_email():
     """
     limpar_tela()
     titulos("ATUALIZAÇÃO DE E-MAIL")
+    listar_participantes()
     id_participante = ler_id("Digite o id do participante que deseja alterar o e-mail: ")
     participante = existencia(id_participante, participantes)
     if not participante:
@@ -96,6 +97,7 @@ def deletar_participante():
     """
     limpar_tela()
     titulos("REMOÇÃO DE PARTICIPANTE")
+    listar_participantes()
     id_participante = ler_id("Digite o id do participante que deseja deletar: ")
     participante = existencia(id_participante, participantes)
     if not participante:
@@ -117,6 +119,8 @@ def inscricao_evento():
         print("Não há eventos disponíveis para realizar inscrição.")
         return
     exibir_eventos()
+    print("")
+    listar_participantes()
     id_evento = ler_id("Digite o ID do evento: ")
     evento = existencia(id_evento, eventos)
     if not evento:
@@ -142,7 +146,6 @@ def inscricao_evento():
 
 def listar_participantes():
     """Lista todos os participantes cadastrados no sistema"""
-    limpar_tela()
     titulos("LISTA DE PARTICPANTES")
 
     if not participantes:
