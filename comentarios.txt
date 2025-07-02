@@ -1,7 +1,4 @@
 falta:
 
-dar opção do usuario alterar ql dado do evento
+
 - arrumar onde limpa tela
-- ver a questão de mostrar todos os temas na hora da média do participante, pq por ser o gestor
-que vai usar essa parte, talvez seja necessário mostrar todos
-- trocar o id do evento por nome

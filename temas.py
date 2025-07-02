@@ -12,10 +12,7 @@ def menu_temas():
     """ 
     menu de temas disponíveis retornando o tema escolhido
     """
-    #solução temporaria
     #limpar
-    print("_" * 15, "TEMAS", "_" * 15)
-    #por isso com meni geral
     print("1 - Inteligência Artificial - IA")
     print("2 - Web")
     print("3 - Segurança")

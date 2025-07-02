@@ -1,5 +1,5 @@
 from util import ler_opcao, limpar_tela, menu_geral, ler_id, existencia
-from participante import cadastrar_participante, procurar_participante, atualizar_email, deletar_participante, inscricao_evento
+from participante import cadastrar_participante, procurar_participante, atualizar_email, deletar_participante, inscricao_evento, listar_participantes
 from estatisticas import *
 from evento import cadastrar_evento, alterar_evento, exibir_eventos, listar_participantes_evento, deletar_evento, filtrar_evento
 from temas import agrupar_tema
@@ -30,10 +30,11 @@ def menu_participantes():
     limpar_tela()
     opcoes = {
         1: ("Cadastrar novo participante", cadastrar_participante),
-        2: ("Realizar inscrição em eventos", inscricao_evento),
-        3: ("Buscar participante por código", procurar_participante),
-        4: ("Atualizar e-mail", atualizar_email),
-        5: ("Remover participante", deletar_participante),
+        2: ("Lista de participantes", listar_participantes),
+        3: ("Realizar inscrição em eventos", inscricao_evento),
+        4: ("Buscar participante por código", procurar_participante),
+        5: ("Atualizar e-mail", atualizar_email),
+        6: ("Remover participante", deletar_participante),
     }
     menu_geral("PARTICIPANTE", opcoes)
 

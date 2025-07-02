@@ -1,6 +1,9 @@
 import os
 from datetime import datetime
-
+from dados import participantes
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from participante import participantes
 def ler_opcao(lim_sup):
     """ 
     le a opcao do usuario, para que seja um numero dentro do intervalo valid
@@ -25,15 +28,19 @@ def limpar_tela():
     #os.name - Retorna o nome do sistema operacional, nesse caso, windows é nt
     #Executa o comando cls (limpar tela no Windows)
     
+def titulos(titulo):
+    print("_"*60)
+    print(titulo.upper().center(60))
+    print("_"*60)
 def menu_geral(titulo, opcoes):
     """ 
     exibe um menu baseado em um dicionario de opções
     """
     while True:
         #limpar_tela()
-        print("_"*50)
-        print(f'{titulo.upper():^50}')
-        print("_"*50)
+        print("_"*60)
+        print(f'{titulo.upper().center(60)}')
+        print("_"*60)
         for num_opcao, (descricao, _) in opcoes.items():
             print(f"{num_opcao}: {descricao}")
         print("0 - Voltar")
@@ -81,13 +88,14 @@ def tratar_data(mensagem= "Data do evento (dd/mm/aaaa): "):
         except ValueError:
                 print("Data inválida. Tente novamente.")
                 
-def verificar_email(email, dicionario):
+def tratar_email():
     """ 
     verifica se o email ja esta sendo usado
     """
-    
-    emails_existentes = set(p['email'] for p in dicionario.values())
-    
-    if email in emails_existentes:
-        print("Esse e-mail já está sendo usado.")
-        return
+    while True:
+        email = input("E-mail: ")
+        emails_existentes = set(p['email'] for p in participantes.values())
+        if email in emails_existentes:
+            print("Esse e-mail já está sendo usado. Cadastre-se com outro e-mail.")
+        else:
+            return email
