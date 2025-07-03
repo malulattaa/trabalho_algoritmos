@@ -27,7 +27,7 @@ def menu_temas():
     while True:
         op = ler_opcao(len(temas))
         if op == 0:
-            print("Digite um número de 1 a 9")
+            print("Opção fora do intervalo. Digite um número entre 1 e 9")
         else:
             return temas[op - 1]
 
@@ -45,4 +45,3 @@ def agrupar_tema():
         for id, evento in lista_evento.items():
             print(f"   - Código do evento: {id} | {evento['nome']}")
         print("-"*60)
-            #precisa de mais alguma coisa alem de id e nome?

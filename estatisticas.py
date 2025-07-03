@@ -14,7 +14,7 @@ def participantes_ativos():
     else:
         print("Não há participante inscrito em mais de um evento.")
         print("")
-
+    sair_tela()
         
 def media_participantes_por_tema():
     """ cálculo da média de participantes que um tema tem"""
@@ -31,6 +31,7 @@ def media_participantes_por_tema():
         print(f"{tema:<30} | Média: {media} participante(s) por evento")
         #alinha o nome do tema à esquerda com até 30 caracteres
         print("")
+    sair_tela()
 def poucos_participantes():
     """mostra eventos com menos de 2 participantes para possível cancelamento"""
     limpar_tela()
@@ -41,6 +42,7 @@ def poucos_participantes():
             print(f" - {nome}")
     else:
         print("Todos os eventos tem pelo menos 2 participantes.")
+    sair_tela()
 def temas_frequentes():
     """ mostra os temas mais frequentes em eventos"""
     limpar_tela()
@@ -52,7 +54,8 @@ def temas_frequentes():
     
     for tema in set(temas):
         print(f" - {tema}: {tema.count(tema)} eventos")
-        #fazer um sorted pra ordenar por qtde de evento?
+        print("")
+    sair_tela()
         
 def resumo_geral():
     limpar_tela()
@@ -74,3 +77,4 @@ def eventos_populares():
     
     for id, evento in populares[:5]:
         print(f"{evento['nome']} | {len(evento['participantes'])} participantes")
+    sair_tela()

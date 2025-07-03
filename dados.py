@@ -3,26 +3,38 @@ from datetime import date, time
 # Participantes
 participantes = {
     1: {
-        'nome': 'Maria Silva',
-        'email': 'maria@email.com',
-        'pref_tematica': ['Inteligência Artificial', 'Web'],
+        'nome': 'Maria Latta',
+        'email': 'maria@gmail.com',
+        'pref_tematica': ['Inteligência Artificial', 'Web', 'Programação'],
         'eventos': [1, 2]
     },
     2: {
-        'nome': 'João Oliveira',
-        'email': 'joao@email.com',
-        'pref_tematica': ['Programação'],
+        'nome': 'Matheus Camarotto',
+        'email': 'matheus@gmail.com',
+        'pref_tematica': ['Programação', 'Segurança'],
         'eventos': [2]
     },
     3: {
-        'nome': 'Ana Costa',
-        'email': 'ana@email.com',
+        'nome': 'Ana Clara',
+        'email': 'ana@gmail.com',
         'pref_tematica': ['Mobile', 'Segurança'],
+        'eventos': []
+    },
+    4: {
+        'nome': 'Vinicius Lima',
+        'email': 'vini@gmail.com',
+        'pref_tematica': ['Web', 'Robótica'],
+        'eventos': [3]
+    },
+    5: {
+        'nome': 'Gabriela Santos',
+        'email': 'gabibibi@gmail.com',
+        'pref_tematica': ['Banco de Dados', 'Programação'],
         'eventos': []
     },
 }
 
-id_participante = 4  
+id_participante = 5  
 
 # Eventos
 eventos = {
@@ -47,6 +59,13 @@ eventos = {
         'tema': 'Mobile',
         'participantes': []
     },
+    4: {
+        'nome': 'Palestra Cybersecurity',
+        'data_evento': date(2025, 6, 12),
+        'hora_evento': time(14, 30),
+        'tema': 'Segurança',
+        'participantes': [4]
+    },
 }
 
-id_evento = 4  
+id_evento = 5

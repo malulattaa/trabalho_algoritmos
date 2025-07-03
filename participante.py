@@ -105,7 +105,7 @@ def deletar_participante():
     del participantes[id_participante]
     for id_evento in participante['eventos']:
         eventos[id_evento]['participantes'].remove(id_participante)
-        
+    limpar_tela()
     print(f"Participante {participante['nome']} removido com sucesso.")
     sair_tela()
     
@@ -135,6 +135,7 @@ def inscricao_evento():
     
     # Verifica se o participante já está inscrito no evento.
     if id_evento in participante['eventos']:
+        limpar_tela()
         print("O participante já está inscrito nesse evento!")
         return
     
@@ -142,15 +143,16 @@ def inscricao_evento():
     participante['eventos'].append(id_evento)
     # o participante é adicionado à lista de participantes do evento
     evento['participantes'].append(id_participante)
-    print(f"{participante['nome']} inscrito no evento {evento['nome']} com sucesso!")
+    limpar_tela()
+    print(f"{participante['nome']} inscrito(a) no evento {evento['nome']} com sucesso!")
     sair_tela()
 
 
 def listar_participantes():
     """Lista todos os participantes cadastrados no sistema"""
-    
+    print("")
     print("LISTA DE PARTICIPANTES".center(60, "-"))
-
+    print("")
     if not participantes:
         print("Nenhum participante cadastrado.")
         return
