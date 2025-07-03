@@ -1,4 +1,4 @@
-from util import limpar_tela, ler_id, existencia, tratar_email, titulos
+from util import limpar_tela, ler_id, existencia, tratar_email, titulos, sair_tela
 from temas import menu_temas
 from dados import participantes, id_participante, eventos
 from typing import TYPE_CHECKING
@@ -21,7 +21,7 @@ def cadastrar_participante():
     
     preferencia = set()
     while True:
-        resposta = input("Deseja adicionar preferência temática? (S/N)").upper()
+        resposta = input("Deseja adicionar preferência temática? (S/N) ").upper()
         if resposta == 'S':
             print("")
             #da pra chamar um menu geral?
@@ -41,10 +41,10 @@ def cadastrar_participante():
         'pref_tematica' : list(preferencia),
         'eventos' : []
     }
-    limpar_tela()
     print(f"Participante {nome} cadastrado com sucesso!")
     print(f"ID: {id_participante} | E-mail: {email}")
     id_participante += 1
+    sair_tela()
     
 def procurar_participante():
     """ 
@@ -71,7 +71,7 @@ def procurar_participante():
             print(f"ID: {id_evento} | Nome: {evento['nome']} | Data: {evento['data_evento'].strftime('%d/%m/%Y')} | Horário: {evento['hora_evento']} | Tema: {evento['tema']}")
     else:
         print("O participante não está inscrito em eventos.")
-        
+    sair_tela()
 def atualizar_email():
     """
     atualiza o e-mail de um participante ja cadastrado
@@ -90,6 +90,7 @@ def atualizar_email():
     email_novo = tratar_email()
     participante['email'] = email_novo
     print(f"O e-mail do participante {participante['nome']} foi alterado com sucesso para {email_novo}.")
+    sair_tela()
 
 def deletar_participante():
     """ 
@@ -103,10 +104,11 @@ def deletar_participante():
     if not participante:
         return
     del participantes[id_participante]
-    # for id_evento in participante['eventos']:
-    #     eventos[id_evento]['participantes'].remove(id_participante)
+    for id_evento in participante['eventos']:
+        eventos[id_evento]['participantes'].remove(id_participante)
         
     print(f"Participante {participante['nome']} removido com sucesso.")
+    sair_tela()
     
 def inscricao_evento():
     """
@@ -115,6 +117,7 @@ def inscricao_evento():
     from evento import exibir_eventos
     limpar_tela()
     titulos("INSCRIÇÃO EM EVENTOS")
+    print("")
     if not eventos:
         print("Não há eventos disponíveis para realizar inscrição.")
         return
@@ -141,11 +144,12 @@ def inscricao_evento():
     # o participante é adicionado à lista de participantes do evento
     evento['participantes'].append(id_participante)
     print(f"{participante['nome']} inscrito no evento {evento['nome']} com sucesso!")
-    
-#listar todos os eventos em que 1 participante esta inscrito
+    sair_tela()
+
 
 def listar_participantes():
     """Lista todos os participantes cadastrados no sistema"""
+    
     titulos("LISTA DE PARTICPANTES")
 
     if not participantes:
@@ -154,4 +158,4 @@ def listar_participantes():
 
     for id_part, dados in participantes.items():
         print(f"ID: {id_part} | Nome: {dados['nome']} | E-mail: {dados['email']}")
-    print()
+    print("")

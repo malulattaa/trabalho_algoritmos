@@ -1,6 +1,6 @@
 from dados import *
 from temas import temas
-from util import limpar_tela, titulos
+from util import limpar_tela, titulos, sair_tela
 
 def participantes_ativos():
     """ lista os participantes que estão inscritos em vários eventos"""
@@ -53,3 +53,12 @@ def temas_frequentes():
     for tema in set(temas):
         print(f" - {tema}: {tema.count(tema)} eventos")
         #fazer um sorted pra ordenar por qtde de evento?
+        
+def resumo_geral():
+    limpar_tela()
+    titulos("RESUMO GERAL DO SISTEMA")
+    print(f"Total de participantes: {len(participantes)}")
+    print(f"Total de eventos: {len(eventos)}")
+    print(f"Temas disponíveis: {len(temas)}")
+    sair_tela()
+    

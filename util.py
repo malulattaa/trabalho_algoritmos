@@ -79,6 +79,7 @@ def tratar_data(mensagem= "Data do evento (dd/mm/aaaa): "):
     """ 
     solicita uma data ao usuário e valida
     """
+    limpar_tela()
     while True: 
         try:
             data_recebida = input(mensagem)
@@ -99,3 +100,7 @@ def tratar_email():
             print("Esse e-mail já está sendo usado. Cadastre-se com outro e-mail.")
         else:
             return email
+def sair_tela():
+    print("")
+    sair = input('Digite ENTER para sair ')
+    limpar_tela()
