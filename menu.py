@@ -45,7 +45,8 @@ def menu_estatisticas():
         2: ("Taxa média de participação por tema", media_participantes_por_tema),
         3: ("Eventos com poucos participantes", poucos_participantes),
         4: ("Temas frequentes", temas_frequentes),
-        5: ("Resumo geral do sistema", resumo_geral)
+        5: ("Resumo geral do sistema", resumo_geral),
+        6: ("Eventos mais populares", eventos_populares)
         
     }
     menu_geral("ESTATÍSTICAS E RELATÓRIOS", opcoes)

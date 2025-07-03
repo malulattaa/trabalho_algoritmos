@@ -66,7 +66,7 @@ def eventos_populares():
     limpar_tela()
     titulos("TOP 5 EVENTOS MAIS POPULARES")
     
-    if not evento:
+    if not eventos:
         print("Nenhum evento cadastrado.")
         return
     
