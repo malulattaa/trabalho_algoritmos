@@ -33,7 +33,7 @@ def cadastrar_evento():
         
     while True:
         print("Digite o horário que o evento irá ocorrer (07:00 - 18:00)")
-        hora = input("Digite o horário do evento (h:min): ")    
+        hora = input("Horário (h:min): ")    
         try:
             horario = datetime.strptime(hora, "%H:%M").time()
             if horario < time(7,0) or horario > time(18, 0):
@@ -42,7 +42,7 @@ def cadastrar_evento():
                 continue
             break 
         except ValueError:
-            print("Hora inválida. Tente novamente.")
+            print("Horário inválido. Certifique-se de que a hora esteja no formato correto, ex. 09:30.")
             
     eventos[id_evento] = {
         'nome' : nome,
@@ -81,7 +81,7 @@ def listar_participantes_evento():
     titulos("PARTICIPANTES DO EVENTO")
     print("")
     exibir_eventos()
-    id_evento = ler_id("Digite o ID do evento: ")
+    id_evento = ler_id("Digite o código do evento: ")
     evento = existencia(id_evento, eventos)
     if not evento:
         print("Evento não encontrado.")
@@ -90,7 +90,7 @@ def listar_participantes_evento():
     limpar_tela()
     if inscritos:
         print(f"Participantes inscritos no evento {evento['nome']}: ")
-        dados = map(lambda item: f"ID: {item[0]} - {item[1]['nome']}: {item[1]['email']}", inscritos.items())
+        dados = map(lambda item: f"Código: {item[0]} - {item[1]['nome']}: {item[1]['email']}", inscritos.items())
         for p in dados:
             print(p)
     else:
@@ -106,7 +106,7 @@ def deletar_evento():
     print("")
     exibir_eventos()
     print("")
-    id_evento = ler_id("Digite o ID do evento: ")
+    id_evento = ler_id("Digite o código do evento: ")
     evento = existencia(id_evento, eventos)
     if not evento:
         return
@@ -149,20 +149,19 @@ def filtrar_evento():
     
 def alterar_evento():
     limpar_tela()
-    titulos("ALTERAR DADOS DO EVENTO")
     print("")
     exibir_eventos()
-    id_evento = ler_id("ID do evento a ser editado: ")
+    id_evento = ler_id("Código do evento a ser editado: ")
     limpar_tela()
     evento = existencia(id_evento, eventos)
     if not evento:
         return
     
     opcoes = {
-        1: ('Nome', lambda: evento.update({'nome': input('Novo nome: ')})),
-        2: ('Data', lambda: evento.update({'data_evento': tratar_data()})),
-        3: ('Hora', lambda: evento.update({'hora_evento': datetime.strptime(input("Nova hora (h:min): "), "%H:%M").time()})),
-        4: ('Tema', lambda: evento.update({'tema': menu_temas()})),
+        1: ('Nome', lambda: (limpar_tela(), evento.update({'nome': input('Novo nome: ')}))),
+        2: ('Data', lambda: (limpar_tela(), evento.update({'data_evento': tratar_data()}))),
+        3: ('Hora', lambda: (limpar_tela(), evento.update({'hora_evento': datetime.strptime(input("Nova hora (h:min): "), "%H:%M").time()}))),
+        4: ('Tema', lambda: (limpar_tela(), evento.update({'tema': menu_temas()}))),
     }
     # a lambda aq é pra ação só ser executada quando a opção for escolhida
     # sem ela a ação foi executada na hora que esse menu é chamado

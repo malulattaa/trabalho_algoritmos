@@ -55,7 +55,7 @@ def verificar_participantes(evento, participantes):
     return dict(filter(lambda item: item[0] in evento['participantes'], participantes.items()))
 #aqui dava pra usar filter mas tava retornando uma lista de tuplas, por isso mudei pra dicio, pra ficar melhor pra tratar
 
-def ler_id(mensagem="Digite o ID: "):
+def ler_id(mensagem="Digite o código: "):
     """ 
     solicita um id ao usuário e retorna se for valido
     """
@@ -63,7 +63,7 @@ def ler_id(mensagem="Digite o ID: "):
         try:
             return int(input(mensagem))
         except ValueError:
-            print("ID inválido.")
+            print("Código inválido.")
 
 def existencia(id, dicionario):
     """ 
@@ -72,14 +72,14 @@ def existencia(id, dicionario):
     item = dicionario.get(id)
     if item:
         return item
-    print("ID não encontrado.")
+    print("Código não encontrado.")
     return None
 
 def tratar_data(mensagem= "Data do evento (dd/mm/aaaa): "):
     """ 
     solicita uma data ao usuário e valida
     """
-    limpar_tela()
+    #nao da pra por limpar tela aq
     while True: 
         try:
             data_recebida = input(mensagem)

@@ -62,3 +62,15 @@ def resumo_geral():
     print(f"Temas disponíveis: {len(temas)}")
     sair_tela()
     
+def eventos_populares():
+    limpar_tela()
+    titulos("TOP 5 EVENTOS MAIS POPULARES")
+    
+    if not evento:
+        print("Nenhum evento cadastrado.")
+        return
+    
+    populares = sorted(eventos.items(), key = lambda pop: len(pop[1]['participantes']))
+    
+    for id, evento in populares[:5]:
+        print(f"{evento['nome']} | {len(evento['participantes'])} participantes")

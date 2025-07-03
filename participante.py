@@ -7,9 +7,7 @@ if TYPE_CHECKING:
     from evento import exibir_eventos
 
 def cadastrar_participante():
-    """ 
-    cadastra novo participante com nome, e-mail e pref temática
-    """
+    """ cadastra novo participante com nome, e-mail e pref temática """
     global id_participante
     #global permite que eu altere uma variável que foi declarada fora da função
     limpar_tela()
@@ -41,8 +39,9 @@ def cadastrar_participante():
         'pref_tematica' : list(preferencia),
         'eventos' : []
     }
+    limpar_tela()
     print(f"Participante {nome} cadastrado com sucesso!")
-    print(f"ID: {id_participante} | E-mail: {email}")
+    print(f"Código: {id_participante} | E-mail: {email}")
     id_participante += 1
     sair_tela()
     
@@ -51,9 +50,9 @@ def procurar_participante():
     busca um participante por id, mostrando suas informações e os eventos em que está inscrito
     """
     limpar_tela()
-    titulos("CONSULTA DE PARTICIPANTE POR ID")
+    titulos("CONSULTA DE PARTICIPANTE POR CÓDIGO")
     listar_participantes()
-    id_participante = ler_id("Digite o id do participante que deseja buscar: ")
+    id_participante = ler_id("Digite o código do participante que deseja buscar: ")
     participante = existencia(id_participante, participantes)
     if not participante: 
         return
@@ -68,7 +67,7 @@ def procurar_participante():
     if participante['eventos']:
         for id_evento in participante['eventos']:
             evento = eventos.get(id_evento)
-            print(f"ID: {id_evento} | Nome: {evento['nome']} | Data: {evento['data_evento'].strftime('%d/%m/%Y')} | Horário: {evento['hora_evento']} | Tema: {evento['tema']}")
+            print(f"Código: {id_evento} | Nome: {evento['nome']} | Data: {evento['data_evento'].strftime('%d/%m/%Y')} | Horário: {evento['hora_evento']} | Tema: {evento['tema']}")
     else:
         print("O participante não está inscrito em eventos.")
     sair_tela()
@@ -79,7 +78,7 @@ def atualizar_email():
     limpar_tela()
     titulos("ATUALIZAÇÃO DE E-MAIL")
     listar_participantes()
-    id_participante = ler_id("Digite o id do participante que deseja alterar o e-mail: ")
+    id_participante = ler_id("Digite o código do participante que deseja alterar o e-mail: ")
     participante = existencia(id_participante, participantes)
     if not participante:
         return
@@ -99,7 +98,7 @@ def deletar_participante():
     limpar_tela()
     titulos("REMOÇÃO DE PARTICIPANTE")
     listar_participantes()
-    id_participante = ler_id("Digite o id do participante que deseja deletar: ")
+    id_participante = ler_id("Digite o código do participante que deseja deletar: ")
     participante = existencia(id_participante, participantes)
     if not participante:
         return
@@ -124,12 +123,12 @@ def inscricao_evento():
     exibir_eventos()
     print("")
     listar_participantes()
-    id_evento = ler_id("Digite o ID do evento: ")
+    id_evento = ler_id("Digite o código do evento: ")
     evento = existencia(id_evento, eventos)
     if not evento:
         return
     
-    id_participante = ler_id("Digite o ID do participante: ")
+    id_participante = ler_id("Digite o código do participante: ")
     participante = existencia(id_participante, participantes)
     if not participante:
         return
@@ -150,12 +149,12 @@ def inscricao_evento():
 def listar_participantes():
     """Lista todos os participantes cadastrados no sistema"""
     
-    titulos("LISTA DE PARTICPANTES")
+    print("LISTA DE PARTICIPANTES".center(60, "-"))
 
     if not participantes:
         print("Nenhum participante cadastrado.")
         return
 
     for id_part, dados in participantes.items():
-        print(f"ID: {id_part} | Nome: {dados['nome']} | E-mail: {dados['email']}")
+        print(f"Código: {id_part} | Nome: {dados['nome']} | E-mail: {dados['email']}")
     print("")
