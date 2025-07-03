@@ -63,7 +63,7 @@ def procurar_participante():
     print(f"Preferências temáticas: ")
     print(", ".join(participante['pref_tematica']) if participante['pref_tematica'] else "O participante não tem preferência temática")
     print("")
-    print(f"Eventos inscritoS: ")
+    print(f"Eventos inscritos: ")
     if participante['eventos']:
         for id_evento in participante['eventos']:
             evento = eventos.get(id_evento)

@@ -15,7 +15,6 @@ def menu_temas():
     print("")
     print("PREFERÊNCIA TEMÁTICA".center(60, "-"))
     print("")
-    #limpar
     print("1 - Inteligência Artificial - IA")
     print("2 - Web")
     print("3 - Segurança")
@@ -25,11 +24,12 @@ def menu_temas():
     print("7 - Mobile")
     print("8 - Computação em Nuvem")
     print("9 - Robótica")
-    print("0 - Voltar")
-    op = ler_opcao(len(temas))
-    # if op == 0:
-    #     return None
-    return temas[op - 1]
+    while True:
+        op = ler_opcao(len(temas))
+        if op == 0:
+            print("Digite um número de 1 a 9")
+        else:
+            return temas[op - 1]
 
 def agrupar_tema():
     """ 
