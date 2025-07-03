@@ -70,7 +70,7 @@ def eventos_populares():
         print("Nenhum evento cadastrado.")
         return
     
-    populares = sorted(eventos.items(), key = lambda pop: len(pop[1]['participantes']))
+    populares = sorted(eventos.items(), key = lambda pop: len(pop[1]['participantes']), reverse=True)
     
     for id, evento in populares[:5]:
         print(f"{evento['nome']} | {len(evento['participantes'])} participantes")
