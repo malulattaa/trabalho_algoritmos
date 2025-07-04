@@ -18,7 +18,7 @@ Dividi as funcionalidades em arquivos distintos referentes a cada área:
     Como já mencionado, o arquivo util.py contém funcionalidades que são importantes no sistema e que foram colocadas em uma função devido a necessidade de ser utilizada regularmente.
     
     Nele constam funções como:
-    - **ler_opcao**: utilizada em menus para ler a opção que o usuário deseja executar, recebendo como parâmetro um limite superior (lim_sup), sendo o número de opções que o usuário pode escolher, de 0 até o limite, onde o número 0 utilizado para voltar a sessão anterior.
+    - _ler_opcao_: utilizada em menus para ler a opção que o usuário deseja executar, recebendo como parâmetro um limite superior (lim_sup), sendo o número de opções que o usuário pode escolher, de 0 até o limite, onde o número 0 utilizado para voltar a sessão anterior.
     - **limpar_tela**: usado para melhorar a interface com o usuário, permitindo uma experiência limpa e clara.
     - **titulos**: também utilizado para melhorar a interface com o usuário, construindo um terminal organizado.
     - **menu_geral**: o menu geral recebe como parâmetro um título e o dicionário. Assim, ele percorre o dicionário onde pega a chave (número da opção) e os valores (descrição e a função associada a ela). No menu exibido ao usuário, mostra apenas o número e a descrição, ignorando a função (através do uso de _ ). Dessa forma, a função só é executada quando o usuário digitar a opção desejada.
