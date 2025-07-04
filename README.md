@@ -13,7 +13,6 @@ Dividi as funcionalidades em arquivos distintos referentes a cada área:
 - `dados.py`: dicionários com dados de eventos e participantes para falicitar o teste;
 - `util.py`: funções utilitárias reutilizáveis.
 
-
 ## Funcionalidades úteis:
 Como já mencionado, o arquivo util.py contém funcionalidades que são importantes no sistema e que foram colocadas em uma função devido a necessidade de ser utilizada regularmente.
     
@@ -26,8 +25,9 @@ Nele constam funções como:
 - **`ler_id`**: Ler id é usada sempre que for requisitado um id para o usuário. A função tem como objetivo verificar se o número digitado é do tipo esperado, eliminando possíveis erros de valor.
 - **`existencia`**: Recebe um id digitado pelo usuário e um dicionário como parâmetro. Se o id existir dentro do dicionário percorrido, o valor é retornado, caso contrário, exibe uma mensagem de código não encontrado.
 - **`tratar_data`**: Esse campo recebe uma data e verifica se a mesma foi digitada no formato que deveria. O strptime é usado para converter string em data/hora, sendo um método da classe datetime. Os formatos %d, %m e %Y são respectivamente usados para que o python identifique um dia com dois dígitos, mês com dois dígitos e ano com quatro dígitos. Caso contrário, exibe uma mensagem de data inválida.
-- **`tratar_email`**: Visto que o e-mail do participante deve ser único, essa função recebe o e-mail e por meio de um set verifica se ele já consta no campo e-mail no dicionário de algum participante, e se constar, exibe uma mensagem para que o usúario digite outro.
+- **`tratar_email`**: Visto que o e-mail do participante deve ser único, essa função recebe o e-mail e por meio de um set verifica se ele já consta no campo e-mail no dicionário de algum participante, e se constar, exibe uma mensagem para que o usúario digite outro. Além disso, impede que o usuário deixe o campo vazio.
 - **`sair_tela`**: Para melhorar a navegação e garantir que os dados e mensagens sejam mostrados corretamente, foi criada uma função para que o usuário determine a hora que quer sair da mesma.
+- **`- ler_campo_obrigatorio`**: Impede que o usuário deixe vazio os campos obrigatórios de: nome do evento, nome do participante e e-mail. 
 
 ## Participantes:
 As funções relacionadas aos participantes, como cadastro, listagem, busca, atualização, inscrição e remoção, são em sua maioria, realizadas através de um ID, criado por uma variável global. O uso da variável foi um meio de garantir que cada participante tenha um identificador único. Dessa forma, mesmo que um participante seja excluído, o ID não poderá ser reutilizado e os outros participantes não sofrerão alterações. 

@@ -1,4 +1,4 @@
-from util import limpar_tela, ler_id, existencia, tratar_email, titulos, sair_tela
+from util import limpar_tela, ler_id, existencia, tratar_email, titulos, sair_tela, ler_campo_obrigatorio
 from temas import menu_temas
 from dados import participantes, id_participante, eventos
 from typing import TYPE_CHECKING
@@ -14,7 +14,7 @@ def cadastrar_participante():
     
     titulos("CADASTRO DE PARTICIPANTE")
     
-    nome = input("Nome completo: ")
+    nome = ler_campo_obrigatorio("Nome do participante: ")
     email = tratar_email()
     
     preferencia = set()

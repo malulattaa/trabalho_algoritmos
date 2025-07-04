@@ -91,8 +91,13 @@ def tratar_email():
     verifica se o email ja esta sendo usado
     """
     while True:
-        email = input("E-mail: ")
+        email = input("E-mail: ").strip()
+        if not email:
+            print("O e-mail não pode ser vazio. Tente novamente.")
+            continue
+        
         emails_existentes = set(p['email'] for p in participantes.values())
+        
         if email in emails_existentes:
             print("Esse e-mail já está sendo usado. Cadastre-se com outro e-mail.")
         else:
@@ -101,3 +106,10 @@ def sair_tela():
     print("")
     sair = input('Digite ENTER para sair ')
     limpar_tela()
+
+def ler_campo_obrigatorio(mensagem):
+    while True:
+        dado = input(mensagem).strip()
+        if dado:
+            return dado
+        print("Este campo é obrigatório. Tente novamente.")

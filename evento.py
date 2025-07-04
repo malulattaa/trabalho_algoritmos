@@ -1,5 +1,5 @@
 from datetime import datetime, date, time
-from util import limpar_tela, tratar_data, ler_id, existencia, verificar_participantes, menu_geral, titulos, sair_tela
+from util import *
 from temas import menu_temas
 from dados import participantes, eventos, id_evento
 
@@ -17,12 +17,10 @@ def cadastrar_evento():
     limpar_tela()
     titulos("CADASTRO DE EVENTO")
     nomes_existentes = set(e['nome'] for e in eventos.values())
-    while True: 
-        nome = input("Nome: ")
-        if nome in nomes_existentes:
-            print("Esse evento já foi cadastrado. Digite outro nome.")
-        else:
-            break
+    nome = ler_campo_obrigatorio("Nome do evento: ")
+    if nome in nomes_existentes:
+        print("Esse evento já foi cadastrado. Digite outro nome.")
+        return
         
     while True:
         data = tratar_data()
