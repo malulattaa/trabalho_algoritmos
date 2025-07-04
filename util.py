@@ -53,7 +53,6 @@ def menu_geral(titulo, opcoes):
 def verificar_participantes(evento, participantes):
     """ dicio com os participantes cadastrados em um evento"""
     return dict(filter(lambda item: item[0] in evento['participantes'], participantes.items()))
-#aqui dava pra usar filter mas tava retornando uma lista de tuplas, por isso mudei pra dicio, pra ficar melhor pra tratar
 
 def ler_id(mensagem="Digite o código: "):
     """ 
@@ -84,7 +83,6 @@ def tratar_data(mensagem= "Data do evento (dd/mm/aaaa): "):
         try:
             data_recebida = input(mensagem)
             data = datetime.strptime(data_recebida, "%d/%m/%Y").date()
-            #arrumar a forma que mostra
             return data
         except ValueError:
                 print("Data inválida. Tente novamente.")

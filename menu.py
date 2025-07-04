@@ -1,4 +1,4 @@
-from util import ler_opcao, limpar_tela, menu_geral, ler_id, existencia
+from util import limpar_tela, menu_geral, ler_id, existencia
 from participante import cadastrar_participante, procurar_participante, atualizar_email, deletar_participante, inscricao_evento, listar_participantes
 from estatisticas import *
 from evento import cadastrar_evento, alterar_evento, exibir_eventos, listar_participantes_evento, deletar_evento, filtrar_evento
