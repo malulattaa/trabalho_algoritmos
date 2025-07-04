@@ -5,9 +5,9 @@ O sistema consiste em um gerenciador de eventos, tendo como funcionalidades prin
 ## Estrutura do Projeto
 
 Dividi as funcionalidades em arquivos distintos referentes a cada área:
-- `participante.py`: cadastro, busca, atualização e inscrição
-- `evento.py`: gerenciamento de eventos
-- `estatisticas.py`: relatórios e análises
+- `participante.py`: cadastro, listagem, busca, atualização, inscrição e remoção
+- `evento.py`: cadastro, listagem, participantes do evento, remoção, alteração, filtro e agrupamento
+- `estatisticas.py`: estatísticas e relatórios, como: participantes mais ativos, média de participante por tema, eventos com poucos participantes, temas frequentes, resumo geral do sistema e eventos populares
 - `temas.py`: temas disponíveis para eventos e preferências
 - `menu.py`: menus e navegação
 - `dados.py`: dicionários com dados de eventos e participantes para falicitar o teste
@@ -52,6 +52,9 @@ de algum participante e se constar, exibe uma mensagem para que o usúario digit
 mostrados corretamente, foi criada uma função para que o usuário determine a hora que 
 quer sair da mesma.
 
+## Participantes:
+As funções relacionadas aos participantes, como cadastro, listagem, busca, atualização, inscrição e remoção, são em sua maioria, realizadas através de um ID, criado por uma variável global. O uso da variável foi um meio de garantir que cada participante tenha um identificador único. Dessa forma, mesmo que um participante seja excluído, o ID não poderá ser reutilizado e os outros participantes não sofrerão alterações. 
+O uso do ID gerado automaticamente foi pensado para garantir que o sistema seja prático. O CPF embora único, exige validações específicas e lida com dados sensíveis. Enquanto isso, o ID referencia o participante com segurança, realiza buscas diretas e garante unicidade sem expor informações pessoais.
 ## Desenvolvido por
 
     Maria Luisa Ribeiro Martins Latta  
