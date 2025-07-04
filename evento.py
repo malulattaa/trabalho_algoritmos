@@ -62,8 +62,6 @@ def exibir_eventos():
     
     print("LISTA DE EVENTOS CADASTRADOS".center(60, "-"))
     print("")
-    #ta mostrando nenhum evento cadastrado e ainda sim mandando digitar o id
-    # porque algumas outras funções chamam o exibir_eventos() antes de pedir ID, mas essa função em si só exibe.
     if len(eventos) == 0:
         print("Nenhum evento cadastrado.")
         return
@@ -72,8 +70,6 @@ def exibir_eventos():
         mostrar_evento(id, evento)
         #aqui, evento.items() é uma tupla (id, dados_do_evento) onde dados_do_evento é um dicionario
         #e pega a data do evento do indice 1 da tupla que é dicio de evento
-    
-
 
 def listar_participantes_evento():
     """lista os participantes inscritos em um evento específico"""
@@ -91,6 +87,7 @@ def listar_participantes_evento():
     if inscritos:
         print(f"Participantes inscritos no evento {evento['nome']}: ")
         dados = map(lambda item: f"Código: {item[0]} - {item[1]['nome']}: {item[1]['email']}", inscritos.items())
+        # converte o dicionario de participantes em uma lista de strings formatadas
         for p in dados:
             print(p)
     else:
@@ -146,8 +143,8 @@ def filtrar_evento():
     
     menu_geral("FILTRAR EVENTO", opcoes)
 
-    
 def alterar_evento():
+    """ permite editar os dados de um evento já cadastrado """
     limpar_tela()
     print("")
     exibir_eventos()
@@ -165,7 +162,6 @@ def alterar_evento():
     }
     # a lambda aq é pra ação só ser executada quando a opção for escolhida
     # sem ela a ação foi executada na hora que esse menu é chamado
-    #arrumar como limpa tela aq
     
     menu_geral("EDITAR EVENTO", opcoes)
     

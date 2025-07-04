@@ -35,6 +35,7 @@ participantes = {
 }
 
 id_participante = 5  
+#próximo id de participante disponível para cadastro
 
 # Eventos
 eventos = {
@@ -69,3 +70,4 @@ eventos = {
 }
 
 id_evento = 5
+#próximo id de evento disponível para cadastro

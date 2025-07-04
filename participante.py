@@ -22,7 +22,6 @@ def cadastrar_participante():
         resposta = input("Deseja adicionar preferência temática? (S/N) ").upper()
         if resposta == 'S':
             print("")
-            #da pra chamar um menu geral?
             tema = menu_temas() 
             if tema in preferencia:
                 print("Essa preferência já foi adicionada.")
@@ -35,7 +34,7 @@ def cadastrar_participante():
         
     participantes[id_participante] = {
         'nome' : nome,
-        'email' : email, #ver se pode por e-mal
+        'email' : email, 
         'pref_tematica' : list(preferencia),
         'eventos' : []
     }

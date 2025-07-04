@@ -7,7 +7,7 @@ def participantes_ativos():
     limpar_tela()
     titulos("PARTICIPANTES MAIS ATIVOS")
     ativos = sorted([(p['nome'], len(p['eventos'])) for p in participantes.values() if len(p['eventos']) >1], key = lambda item: item[1], reverse=True)
-
+    # mostra os participantes que estão inscritos em mais de um evento, ordenados pela quantidade de eventos inscritos
     if ativos:
         for nome, qtde in ativos:
             print(f"{nome}: {qtde} eventos inscritos.")
@@ -25,6 +25,7 @@ def media_participantes_por_tema():
         if evento_tema:
             participantes_tema = sum(len(e['participantes']) for e in evento_tema)
             media = round(participantes_tema / len(evento_tema), 2)
+            # calcula e arredonda a média de participantes por tema
         else:
             media = 0
         
@@ -53,11 +54,13 @@ def temas_frequentes():
     temas = [evento['tema'] for evento in eventos.values()]
     
     for tema in set(temas):
+        # conta quantas vezes cada tema aparece nos eventos sem repetição
         print(f" - {tema}: {tema.count(tema)} eventos")
         print("")
     sair_tela()
         
 def resumo_geral():
+    """ exibe um resumo geral do sistema com total de participantes, eventos e temas """
     limpar_tela()
     titulos("RESUMO GERAL DO SISTEMA")
     print(f"Total de participantes: {len(participantes)}")
@@ -66,6 +69,7 @@ def resumo_geral():
     sair_tela()
     
 def eventos_populares():
+    """ lista os 5 eventos mais populares com base no número de participantes """
     limpar_tela()
     titulos("TOP 5 EVENTOS MAIS POPULARES")
     
@@ -74,6 +78,7 @@ def eventos_populares():
         return
     
     populares = sorted(eventos.items(), key = lambda pop: len(pop[1]['participantes']), reverse=True)
+    # ordena os eventos pela quantidade de participantes em ordem decrescente
     
     for id, evento in populares[:5]:
         print(f"{evento['nome']} | {len(evento['participantes'])} participantes")

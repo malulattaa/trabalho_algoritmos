@@ -37,7 +37,6 @@ def menu_geral(titulo, opcoes):
     exibe um menu baseado em um dicionario de opções
     """
     while True:
-        #limpar_tela()
         print("_"*60)
         print(f'{titulo.upper().center(60)}')
         print("_"*60)
