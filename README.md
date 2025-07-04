@@ -69,12 +69,12 @@ O módulo `estatisticas.py` tem como objetivo gerar **informações úteis a par
 
 Entre as funcionalidades disponíveis, estão:
 
-- **Participantes mais ativos** — lista os participantes inscritos em mais de um evento.
-- **Média de participantes por tema** — calcula a média de inscritos em eventos agrupados por tema.
-- **Eventos com poucos participantes** — exibe eventos com menos de dois inscritos, para possível cancelamento.
-- **Temas frequentes** — identifica os temas mais usados nos eventos cadastrados.
-- **Resumo geral** — mostra uma visão ampla com o total de participantes, eventos e temas.
-- **Eventos mais populares** — ordena e exibe os 5 eventos com mais participantes.
+- **Participantes mais ativos** - lista os participantes inscritos em mais de um evento.
+- **Média de participantes por tema** - calcula a média de inscritos em eventos agrupados por tema.
+- **Eventos com poucos participantes** - exibe eventos com menos de dois inscritos, para possível cancelamento.
+- **Temas frequentes** - identifica os temas mais usados nos eventos cadastrados.
+- **Resumo geral** - mostra uma visão ampla com o total de participantes, eventos e temas.
+- **Eventos mais populares** - ordena e exibe os 5 eventos com mais participantes.
 
 > O objetivo dessa seção é **prover insights rápidos e relevantes** para o organizador dos eventos.
 
