@@ -153,7 +153,7 @@ def alterar_evento():
         return
     
     opcoes = {
-        1: ('Nome', lambda: (limpar_tela(), evento.update({'nome': input('Novo nome: ')}))),
+        1: ('Nome', lambda: (limpar_tela(), evento.update({'nome': ler_campo_obrigatorio('Novo nome: ')}))),
         2: ('Data', lambda: (limpar_tela(), evento.update({'data_evento': tratar_data()}))),
         3: ('Hora', lambda: (limpar_tela(), evento.update({'hora_evento': datetime.strptime(input("Nova hora (h:min): "), "%H:%M").time()}))),
         4: ('Tema', lambda: (limpar_tela(), evento.update({'tema': menu_temas()}))),
