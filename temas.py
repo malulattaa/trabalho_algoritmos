@@ -1,10 +1,5 @@
-from util import limpar_tela, ler_opcao, titulos
+from util import limpar_tela, ler_opcao, titulos, sair_tela
 from dados import eventos
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    from evento import exibir_eventos
-
 
 temas = ["Inteligência Artificial", "Web", "Segurança", "Rede", "Programação", "Banco de dados", "Mobile", "Computação em Nuvem", "Robótica"]
 def menu_temas():
@@ -45,3 +40,4 @@ def agrupar_tema():
         for id, evento in lista_evento.items():
             print(f"   - Código do evento: {id} | {evento['nome']}")
         print("-"*60)
+    sair_tela()

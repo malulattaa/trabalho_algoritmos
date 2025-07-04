@@ -24,7 +24,7 @@ def media_participantes_por_tema():
         evento_tema = [e for e in eventos.values() if e['tema'] == tema]
         if evento_tema:
             participantes_tema = sum(len(e['participantes']) for e in evento_tema)
-            media = participantes_tema/ len(evento_tema)
+            media = round(participantes_tema / len(evento_tema), 2)
         else:
             media = 0
         
@@ -78,3 +78,4 @@ def eventos_populares():
     for id, evento in populares[:5]:
         print(f"{evento['nome']} | {len(evento['participantes'])} participantes")
     sair_tela()
+
