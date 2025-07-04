@@ -55,6 +55,29 @@ quer sair da mesma.
 ## Participantes:
 As funções relacionadas aos participantes, como cadastro, listagem, busca, atualização, inscrição e remoção, são em sua maioria, realizadas através de um ID, criado por uma variável global. O uso da variável foi um meio de garantir que cada participante tenha um identificador único. Dessa forma, mesmo que um participante seja excluído, o ID não poderá ser reutilizado e os outros participantes não sofrerão alterações. 
 O uso do ID gerado automaticamente foi pensado para garantir que o sistema seja prático. O CPF embora único, exige validações específicas e lida com dados sensíveis. Enquanto isso, o ID referencia o participante com segurança, realiza buscas diretas e garante unicidade sem expor informações pessoais.
+
+## Eventos:
+As funções realizadas em eventos como cadastro, listagem, participantes do evento, remoção, alteração, filtro e agrupamento por tema, também utilizam um ID numérico único. Apesar do sistema garantir que o nome do evento seja único, seu uso como chave foi evitado para permitir alterações futuras no nome do evento sem erros, cadastro de nomes parecidos e facilidade na referência as eventos.
+Da mesma forma como em participantes, a variável global também foi utilizada em eventos para garantir códigos únicos e sequenciais, contando ainda com: 
+- **validações de data**: para não permitir que o evento seja cadastrado em datas passadas;
+- **validação de horários**: foi determinado um período comercial e os eventos só podem acontecer nesse intervalo; 
+- **tema central**: cada evento tem seu tema central.
+
+## Estatísticas e Relatórios
+
+O módulo `estatisticas.py` tem como objetivo gerar **informações úteis a partir dos cadastros e inscrições realizadas**.
+
+Entre as funcionalidades disponíveis, estão:
+
+- **Participantes mais ativos** — lista os participantes inscritos em mais de um evento.
+- **Média de participantes por tema** — calcula a média de inscritos em eventos agrupados por tema.
+- **Eventos com poucos participantes** — exibe eventos com menos de dois inscritos, para possível cancelamento.
+- **Temas frequentes** — identifica os temas mais usados nos eventos cadastrados.
+- **Resumo geral** — mostra uma visão ampla com o total de participantes, eventos e temas.
+- **Eventos mais populares** — ordena e exibe os 5 eventos com mais participantes.
+
+> O objetivo dessa seção é **prover insights rápidos e relevantes** para o organizador dos eventos.
+
 ## Desenvolvido por
 
     Maria Luisa Ribeiro Martins Latta  
