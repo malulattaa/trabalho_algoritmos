@@ -1,6 +1,7 @@
 from dados import *
 from temas import temas
 from util import limpar_tela, titulos, sair_tela
+from collections import Counter
 
 def participantes_ativos():
     """ lista os participantes que estão inscritos em vários eventos"""
@@ -53,10 +54,11 @@ def temas_frequentes():
         return
     temas = [evento['tema'] for evento in eventos.values()]
     
-    for tema in set(temas):
-        # conta quantas vezes cada tema aparece nos eventos sem repetição
-        print(f" - {tema}: {tema.count(tema)} eventos")
-        print("")
+    contagem = Counter(temas)
+    for tema, quantidade in contagem.items():
+        print(f" - {tema}: {quantidade} evento(s)")
+    
+    print("")
     sair_tela()
         
 def resumo_geral():

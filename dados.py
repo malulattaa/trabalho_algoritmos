@@ -34,7 +34,7 @@ participantes = {
     },
 }
 
-id_participante = 5  
+id_participante = 6
 #próximo id de participante disponível para cadastro
 
 # Eventos
@@ -54,10 +54,10 @@ eventos = {
         'participantes': [1, 2]
     },
     3: {
-        'nome': 'Workshop Mobile',
+        'nome': 'Workshop IA',
         'data_evento': date(2025, 7, 15),
         'hora_evento': time(9, 30),
-        'tema': 'Mobile',
+        'tema': 'Inteligência Artificial',
         'participantes': []
     },
     4: {
